@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/styles/index.css";
 
 
 // const geistMono = Geist_Mono({
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );
