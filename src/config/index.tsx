@@ -21,6 +21,10 @@ class AxiosConfig {
     return await this.instance.post("/login", { username, password })
   }
 
+  async register(username: string, password: string, confirmPassword: string){
+    return await this.instance.post("/register", {username, password, confirmPassword})
+  }
+
 }
 
 const config = new AxiosConfig();

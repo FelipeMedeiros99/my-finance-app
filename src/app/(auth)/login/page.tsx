@@ -34,7 +34,7 @@ export default function Login() {
       })
     } else {
       console.error(e)
-      alert("Um erro desconhecido aconteceu, contate o desenvolvedor")
+      alert("Um erro desconhecido aconteceu, tente novamente mais tarde.")
     }
   }
 
@@ -51,7 +51,7 @@ export default function Login() {
         handleLoginErrors(e)
       } else {
         console.error(e)
-        alert("Um erro desconhecido aconteceu, contate o desenvolvedor")
+        alert("Um erro desconhecido aconteceu, tente novamente mais tarde.")
       }
     }
   };

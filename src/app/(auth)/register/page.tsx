@@ -1,12 +1,15 @@
 "use client"
 
 import { SubmitHandler, useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 
-import Input from "@/components/Input"
 import { passwordRules, usernameRules } from "./const"
+import Input from "@/components/Input"
 
 import styles from "../style.module.css"
+import config from "@/config"
+import { AxiosError } from "axios"
 
 type Form = {
   username: string
@@ -16,13 +19,34 @@ type Form = {
 
 export default function Register() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm<Form>();
-  const onSubmit: SubmitHandler<Form> = (data) => {
-    if(data.password !== data.confirmPassword){
-      setError("password", {type: "manual", message: "Senhas não coincidem"})
-      setError("confirmPassword", {type: "manual", message: "Senhas não coincidem"})
-      return
+  const router = useRouter()
+
+  const onSubmit: SubmitHandler<Form> = async (data) => {
+    const { username, password, confirmPassword } = data;
+
+    if (password !== confirmPassword) {
+      setError("password", { type: "manual", message: "Senhas não coincidem" })
+      setError("confirmPassword", { type: "manual", message: "Senhas não coincidem" })
+      return;
     }
-    console.log("clicado", data)
+    try {
+      const response = await config.register(data.username, data.password, data.confirmPassword)
+      if (response.status === 201) {
+        alert("Usuário criado, faça login!")
+        router.push("/login")
+      }
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const message = e?.response?.data?.message;
+        if (message === "This username is already registered.") {
+          setError("username", { type: "manual", message: "Este usuário já está em uso" })
+          return
+        }
+      } else {
+        console.error(e)
+        alert("Um erro desconhecido aconteceu, tente novamente mais tarde.")
+      }
+    }
   };
 
   return (
