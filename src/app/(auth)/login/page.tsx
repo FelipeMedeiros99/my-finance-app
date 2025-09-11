@@ -9,7 +9,7 @@ import { passwordRules, usernameRules } from "./const"
 
 import styles from "../style.module.css"
 import config from "@/config"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 
 type Form = {
   username: string
@@ -18,7 +18,26 @@ type Form = {
 
 export default function Login() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm<Form>();
-  const router = useRouter()
+  const router = useRouter();
+
+  const handleLoginErrors = (e: AxiosError) => {
+    const error = e?.response?.data as { message: string }
+    if (error?.message === "username not found") {
+      return setError("username", { 
+        type: "manual", 
+        message: "Usuário não encontrado" 
+      })
+    } else if (error?.message === "Incorrect password") {
+      return setError("password", { 
+        type: "manual", 
+        message: "Senha incorreta" 
+      })
+    } else {
+      console.error(e)
+      alert("Um erro desconhecido aconteceu, contate o desenvolvedor")
+    }
+  }
+
   const onSubmit: SubmitHandler<Form> = async (data) => {
     try {
       const response = await config.login(data.username, data.password)
@@ -28,18 +47,10 @@ export default function Login() {
         router.push("/home");
       }
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const error = e?.response?.data
-        if (error.message === "username not found") {
-          return setError("username", { type: "manual", message: "Usuário não encontrado" })
-        } else if (error.message === "Incorrect password") {
-          return setError("password", { type: "manual", message: "Senha incorreta" })
-        }else{
-          console.log(e)
-          alert("Um erro desconhecido aconteceu, contate o desenvolvedor")  
-        }
-      }else{
-        console.log(e)
+      if (e instanceof AxiosError) {
+        handleLoginErrors(e)
+      } else {
+        console.error(e)
         alert("Um erro desconhecido aconteceu, contate o desenvolvedor")
       }
     }

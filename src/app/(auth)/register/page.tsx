@@ -24,10 +24,10 @@ export default function Register() {
     }
     console.log("clicado", data)
   };
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-      <h1>Login</h1>
+      <h1>Cadastro</h1>
 
       <Input
         label="Usuário: "
