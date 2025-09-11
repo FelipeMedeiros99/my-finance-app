@@ -1,0 +1,21 @@
+.inputContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  gap: var(--space-1);
+}
+
+.input{
+  height: var(--space-8);
+  border: none;
+  box-shadow: var(--shadow-line);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+}
+
+.errorAlert{
+  color: var(--btn-danger-bg);
+  font-size: var(--font-size-xs);
+}

@@ -1,0 +1,23 @@
+.mainContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  padding: var(--space-3);
+}
+
+.formContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  border: solid 1px var(--gray-900);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  gap: var(--space-4);
+}
