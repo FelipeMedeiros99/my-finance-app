@@ -12,7 +12,6 @@ type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
 
 export default function Input({label, error, ...props}: PropsInput){
   const id = useId();
-  console.log("error: ", error)
   return (
   <div className={styles.inputContainer}>
     <label htmlFor={id}>{label}</label>
