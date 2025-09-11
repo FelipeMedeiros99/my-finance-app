@@ -7,11 +7,11 @@ export const usernameRules = {
     value: /^[a-zA-Z0-9._]+$/,
     message: `Apenas letras, números, ponto (.) e underline (_).`
   },
-  min: {
+  minLength: {
     value: 3,
     message: "Mínimo de 3 caracteres"
   },
-  max: {
+  maxLength: {
     value: 100,
     message: "Máximo de 100 caracteres"
   }
@@ -23,11 +23,11 @@ export const passwordRules = {
     value: true,
     message: "Este campo é obrigatório"
   },
-  min: {
+  minLength: {
     value: 3,
     message: "Mínimo de 3 caracteres"
   },
-  max: {
+  maxLength: {
     value: 20,
     message: "Máximo de 20 caracteres"
   }
