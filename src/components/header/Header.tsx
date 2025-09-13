@@ -17,16 +17,12 @@ export default function Header() {
   useEffect(() => {
     const closeLinks = (e: MouseEvent) => {
       if (isLinksVisible && ulRef.current !== null) {
-
         if (!ulRef?.current.contains(e.target as Node)) {
           setIsLinksVisible(false)
         }
-
       }
     }
-
     document.addEventListener("click", closeLinks)
-
     return () => {
       document.removeEventListener("click", closeLinks)
     }

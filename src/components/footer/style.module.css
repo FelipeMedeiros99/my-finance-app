@@ -16,6 +16,60 @@
 
 }
 
+.nav{
+  position: fixed;
+  bottom: var(--space-20);
+  right: 50%;
+  transform: translate(50%, 0);
+}
+
+.ul{
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  background-color: white;
+  padding: var(--space-4);
+  width: max-content;
+  box-sizing: content-box;
+  border-radius: var(--radius-lg);
+}
+
+.link{
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  text-decoration: none;
+  padding: var(--space-1);
+}
+
+.icon{
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weights-light);
+  border: solid 1px black;
+  border-radius: var(--radius-full);
+  margin-right: var(--space-2);
+}
+
+.plus{
+  color: var(--btn-success-active);
+  border: solid 1px var(--btn-success-active);
+}
+.minus{
+
+  color: var(--btn-danger-active);
+  border: solid 1px var(--btn-danger-active);
+}
+.card{
+  color: var(--btn-alert-active);
+  border: solid 1px var(--btn-alert-active);
+}
+.transfer{
+  color: var(--btn-secondary-active);
+  border: solid 1px var(--btn-secondary-active);
+}
+
+
 .button{
   position: absolute;
   display: flex;
