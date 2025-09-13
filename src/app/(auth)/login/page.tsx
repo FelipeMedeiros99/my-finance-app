@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import Input from "@/components/Input"
+import Input from "@/components/input/Input"
 import { passwordRules, usernameRules } from "./const"
 
 import styles from "../style.module.css"

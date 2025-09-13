@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 import { passwordRules, usernameRules } from "./const"
-import Input from "@/components/Input"
+import Input from "@/components/input/Input"
 
 import styles from "../style.module.css"
 import config from "@/config"
