@@ -31,7 +31,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       {isOptionsVisible &&
         <nav className={styles.nav}>
-          <ul className={styles.ul} ref={ulRef}>
+          <ul className={styles.ul} ref={ulRef} onClick={()=>setIsOptionVisible(false)}>
             {options.map((option) => (
               <Link className={styles.link} href={option.url} key={option.title}>{option.icon}{option.title}</Link>
             ))}
