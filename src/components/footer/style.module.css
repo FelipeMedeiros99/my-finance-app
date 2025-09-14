@@ -32,6 +32,7 @@
   width: max-content;
   box-sizing: content-box;
   border-radius: var(--radius-lg);
+  border: solid 1px var(--color-primary);
 }
 
 .link{

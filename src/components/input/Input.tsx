@@ -5,8 +5,8 @@ import { InputHTMLAttributes, useId } from "react"
 import styles from "./style.module.css"
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
-  label: string
-  name: string
+  label?: string
+  name?: string
   error?: string | undefined
 }
 
