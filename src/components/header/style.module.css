@@ -1,8 +1,7 @@
 .header{
-  /* position: fixed;
+  position: fixed;
   top: 0;
-  left: 0; */
-  position: relative;
+  left: 0;
   width: 100%;
   background-color: var(--color-analogous-2);
   height: var(--space-12);
