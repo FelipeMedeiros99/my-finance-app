@@ -11,7 +11,7 @@ export default function Start() {
   const route = useRouter()
   useEffect(() => {
     route.push("/login");
-  }, [])
+  }, [route])
 
   return (
     <div className={styles.spinnerContainer}>

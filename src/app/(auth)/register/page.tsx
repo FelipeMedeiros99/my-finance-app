@@ -30,7 +30,7 @@ export default function Register() {
       return;
     }
     try {
-      const response = await config.register(data.username, data.password, data.confirmPassword)
+      const response = await config.register(username, password, confirmPassword)
       if (response.status === 201) {
         alert("Usuário criado, faça login!")
         router.push("/login")

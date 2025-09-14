@@ -9,7 +9,7 @@ import { passwordRules, usernameRules } from "./const"
 
 import styles from "../style.module.css"
 import config from "@/config"
-import axios, { AxiosError } from "axios"
+import { AxiosError } from "axios"
 
 type Form = {
   username: string
