@@ -21,7 +21,7 @@ type Form = {
 
 export default function New() {
   const {register, handleSubmit, watch, formState: {errors}} = useForm<Form>();
- 
+  console.log(watch("description"))
   const onSubmit = (data: Form) => console.log(data);
   console.log(errors)
 
