@@ -9,6 +9,8 @@
 
 .input{
   height: var(--space-8);
+  width: 100%;
+  background-color: white;
   /* border: none; */
   /* box-shadow: var(--shadow-line); */
   border: solid 1px black;
