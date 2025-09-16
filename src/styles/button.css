@@ -39,6 +39,7 @@ button{
 }
 
 .btn.danger{
+  color: var(--btn-danger-text);
   background-color: var(--btn-danger-bg);
 }
 
