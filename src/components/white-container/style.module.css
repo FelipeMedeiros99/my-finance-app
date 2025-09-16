@@ -3,6 +3,7 @@
   padding: var(--space-3);
   margin: var(--space-3);
   min-height: var(--space-32);
+  position: relative;
   
   
   border-radius: var(--radius-lg);
@@ -24,3 +25,8 @@
   color: var(--color-secondary);
   border: solid 1px var(--color-secondary);
 } 
+
+
+.title{
+  margin-bottom: var(--space-6);
+}
