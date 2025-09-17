@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 class AxiosConfig {
   instance;
@@ -15,6 +15,17 @@ class AxiosConfig {
       }
       return config;
     });
+
+      this.instance.interceptors.response.use(
+      (response: AxiosResponse) => response,
+      (error: AxiosError) => {
+        if(error.response?.status === 401){
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        }
+        return Promise.reject(error)
+      }
+    )
   }
 
   async login(username: string, password: string): Promise<AxiosResponse> {
@@ -26,7 +37,7 @@ class AxiosConfig {
   }
 
   async getCategorys(){
-    return await this.instance.get("/category/all")
+    return await this.instance.get("/category/all");
   }
 
   async deleteCategory(id: number){
