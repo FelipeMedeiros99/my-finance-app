@@ -37,7 +37,7 @@ class AxiosConfig {
   }
 
   async getCategorys(){
-    return await this.instance.get("/category/all");
+    return await this.instance.get("/category");
   }
 
   async deleteCategory(id: number){
