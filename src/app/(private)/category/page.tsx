@@ -9,8 +9,10 @@ import config from "@/config"
 
 import WhiteContainer from "@/components/white-container/WhiteContainer"
 import Input from "@/components/input/Input";
+import Modal from "@/components/modal/Modal";
 
 import styles from "./style.module.css"
+import { rules } from "./const";
 
 type Form = {
   name: string;
@@ -32,17 +34,17 @@ export default function Category() {
   })
 
   const onSubmit: SubmitHandler<Form> = async (data: Form) => {
-    try{
-      if(!data.id){
+    try {
+      if (!data.id) {
         await config.createCategory(data.name, data.type)
         await getCategorys()
         cancelModalFunction()
-      }else{
+      } else {
         await config.editCategory(data.id, data.name)
         await getCategorys()
         cancelModalFunction()
       }
-    }catch(e){
+    } catch (e) {
       console.log(e)
       alert("Erro ao tentar criar a categoria")
     }
@@ -53,9 +55,8 @@ export default function Category() {
     setValue("name", "");
     setValue("type", pageType);
     setValue("id", null);
-    setError("name", {type: "required", message: ""}) 
+    setError("name", { type: "required", message: "" })
   }
-
 
   const getCategorys = async () => {
     try {
@@ -82,7 +83,7 @@ export default function Category() {
     setValue("name", "");
     setValue("type", pageType);
     setValue("id", null);
-    setError("name", {type: "required", message: ""});
+    setError("name", { type: "required", message: "" });
   }
 
   const editCategory = (category: any) => {
@@ -107,9 +108,7 @@ export default function Category() {
       </div>
 
       <WhiteContainer title="Categorias" theme={pageType === "EXPENSE" ? "red" : pageType === "INCOME" ? "green" : "neutral"}>
-
-        <FaPlusCircle className={styles.icon} onClick={() => openModal()}/>
-
+        <FaPlusCircle className={styles.icon} onClick={() => openModal()} />
         <div className={styles.categoryContainer}>
           {categories &&
             categories.map((category: any) => {
@@ -119,7 +118,7 @@ export default function Category() {
                     <div key={category.id} className={styles.category}>
                       <p>{category.name}</p>
                       <div className={styles.icons}>
-                        <FaEdit onClick={() => editCategory(category)}/>
+                        <FaEdit onClick={() => editCategory(category)} />
                         <AiFillDelete onClick={() => deleteCategorys(category.id)} />
                       </div>
                     </div>
@@ -128,26 +127,18 @@ export default function Category() {
               }
             })}
         </div>
-
-
-
-        {isModalVisible &&
-
-          <div className={styles.modal}>
-            <WhiteContainer title="Nova categoria" theme={pageType === "EXPENSE" ? "red" : pageType === "INCOME" ? "green" : "neutral"}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-
-                <Input {...register("name", { required: {value: true, message: "Campo obrigatório"} })} error={errors.name?.message} label="Título: " placeholder="Título da categoria" />
-
-                <div className={styles.containerButtons}>
-                  <button type="button" onClick={cancelModalFunction} className="btn danger">Cancelar</button>
-                  <button type="submit" className="btn success">Salvar</button>
-                </div>
-              </form>
-
-            </WhiteContainer>
-          </div>}
       </WhiteContainer>
+
+      <Modal isOpen={isModalVisible} setIsOpen={setIsModalVisible} title="Nova categoria" theme={pageType === "EXPENSE" ? "red" : pageType === "INCOME" ? "green" : "neutral"}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input {...register("name", rules.name)} error={errors.name?.message} label="Título: " placeholder="Título da categoria" />
+          <div className={styles.containerButtons}>
+            <button type="button" onClick={cancelModalFunction} className="btn danger">Cancelar</button>
+            <button type="submit" className="btn success">Salvar</button>
+          </div>
+        </form>
+      </Modal>
+      
     </React.Fragment>
   )
 }
