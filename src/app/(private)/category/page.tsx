@@ -52,8 +52,7 @@ export default function Category() {
         cancelModalFunction()
       }
     } catch (e) {
-      console.log(e)
-      alert("Erro ao tentar criar a categoria")
+      console.log(e)  
     }
   }
 
@@ -68,10 +67,10 @@ export default function Category() {
   const getCategorys = async () => {
     try {
       const categorys = await config.getCategorys()
-      setCategories(categorys.data);
+      setCategories(categorys?.data);
     } catch (e) {
       console.log(e)
-      alert("Erro ao tentar buscar as categorias")
+      // alert("Erro ao tentar buscar as categorias")
     }
   }
 
@@ -81,7 +80,7 @@ export default function Category() {
       await getCategorys()
     } catch (e) {
       console.log(e)
-      alert("Erro ao tentar deletar a categoria")
+      // alert("Erro ao tentar deletar a categoria")
     }
   }
 
