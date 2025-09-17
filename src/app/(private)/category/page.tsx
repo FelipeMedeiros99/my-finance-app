@@ -20,6 +20,13 @@ type Form = {
   id: number | null;
 }
 
+type CategoryModel = {
+  id: number;
+  name: string;
+  type: string;
+}
+
+
 export default function Category() {
   const [categories, setCategories] = useState([])
   const [pageType, setPageType] = useState<"EXPENSE" | "INCOME">("EXPENSE")
@@ -86,7 +93,7 @@ export default function Category() {
     setError("name", { type: "required", message: "" });
   }
 
-  const editCategory = (category: any) => {
+  const editCategory = (category: CategoryModel) => {
     setValue("name", category.name);
     setValue("type", category.type);
     setValue("id", category.id);
@@ -111,7 +118,7 @@ export default function Category() {
         <FaPlusCircle className={styles.icon} onClick={() => openModal()} />
         <div className={styles.categoryContainer}>
           {categories &&
-            categories.map((category: any) => {
+            categories.map((category: CategoryModel) => {
               {
                 if (category.type === pageType) {
                   return (
@@ -119,7 +126,7 @@ export default function Category() {
                       <p>{category.name}</p>
                       <div className={styles.icons}>
                         <FaEdit onClick={() => editCategory(category)} />
-                        <AiFillDelete onClick={() => deleteCategorys(category.id)} />
+                        <AiFillDelete onClick={() => deleteCategorys(category?.id)} />
                       </div>
                     </div>
                   )
@@ -138,7 +145,7 @@ export default function Category() {
           </div>
         </form>
       </Modal>
-      
+
     </React.Fragment>
   )
 }

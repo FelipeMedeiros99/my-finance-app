@@ -32,7 +32,7 @@ export default function Modal({ children, isOpen, setIsOpen, theme }: Props) {
     return (()=>{
       document.removeEventListener("click", handleClickOutside);
     })
-  }, [isOpen])
+  }, [setIsOpen, isOpen])
   
   return (
     <React.Fragment>

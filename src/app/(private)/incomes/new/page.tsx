@@ -39,7 +39,7 @@ export default function New() {
 
   useEffect(()=>{
     setValue("value", convertToStringNumber(value))
-  }, [value])
+  }, [value, setValue])
 
   return (
     <WhiteContainer theme="green" title="Nova Receita">
