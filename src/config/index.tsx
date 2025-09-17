@@ -5,7 +5,7 @@ class AxiosConfig {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: "http://localhost:5002",
+      baseURL: process.env.NEXT_PUBLIC_URL,
     })
 
     this.instance.interceptors.request.use((config) => {
