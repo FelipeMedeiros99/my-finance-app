@@ -1,8 +1,26 @@
 export function filterNumbers(value: string){
-  return value.replace(/\D/, "")
+  const filtredValue = value.replace(/\D+/g, "")
+  return filtredValue;
 }
 
 export function convertToStringNumber(value: string){
-  const convertedValue = Number(filterNumbers(value))/100
-  return convertedValue>0?`${convertedValue}`:"0.00"
+  value = value.replace(",", ".")
+
+  if(!value.includes(".")){
+    value = value + "00"
+  }
+  value = filterNumbers(value)
+  return String((Number(value)/100).toFixed(2))
+}
+
+
+export function convertToMoneyFormat(value: string){
+  value = convertToStringNumber(value)
+
+  return Number(value).toLocaleString("pt-BT", {style: "currency", currency: "BRL"})
+}
+
+export function convertToNumberFormat(value: string){
+  value = convertToStringNumber(value)
+  return Number(value)
 }
