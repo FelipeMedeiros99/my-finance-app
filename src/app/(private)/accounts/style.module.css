@@ -1,0 +1,40 @@
+.containerButtons{
+  margin-top: var(--space-5);
+  display: flex;
+  width: 100%;
+  align-items: center; 
+  justify-content: center;
+  gap: var(--space-2);
+
+  
+
+}
+
+.categoryContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2);
+  gap: var(--space-2);
+}
+
+.account{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  border: var(--border-default);
+}
+
+.icons{
+  font-size: var(--font-size-2xl);
+}
+
+.icon{
+  font-size: var(--font-size-2xl);
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+
+}
