@@ -66,7 +66,7 @@ export default function Category() {
 
   const getCategorys = async () => {
     try {
-      const categorys = await config.getCategorys()
+      const categorys = await config.getCategories()
       setCategories(categorys?.data);
     } catch (e) {
       console.log(e)
