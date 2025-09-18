@@ -22,12 +22,15 @@ class AxiosConfig {
         if(error.response?.status === 401){
           localStorage.removeItem("token");
           window.location.href = "/login";
+        }else if(error?.code === "ERR_NETWORK"){
+          alert("Sem conexão com a internet")
         }
         return Promise.reject(error)
       }
     )
   }
 
+  // =========== Auth =================
   async login(username: string, password: string): Promise<AxiosResponse> {
     return await this.instance.post("/login", { username, password })
   }
@@ -36,8 +39,13 @@ class AxiosConfig {
     return await this.instance.post("/register", {username, password, confirmPassword})
   }
 
-  async getCategorys(){
+  // ========== Category ==============
+  async getCategories(){
     return await this.instance.get("/category");
+  }
+
+  async getCategoryNames(){
+    return await this.instance.get("/category/names");
   }
 
   async deleteCategory(id: number){
@@ -50,6 +58,27 @@ class AxiosConfig {
 
   async editCategory(id: number, name: string){
     return await this.instance.put(`/category/${id}`, {name})
+  }
+
+  // ============ Accounts ============ 
+  async getAccounts(){
+    return await this.instance.get("/account");
+  }
+
+  async getAccountNames(){
+    return await this.instance.get("/account/names");
+  }
+
+  async deleteAccount(id: number){
+    return await this.instance.delete(`/account/${id}`)
+  }
+
+  async createAccount(name: string, openingBalance: number){
+    return await this.instance.post("/account", {name, openingBalance})
+  }
+
+  async editAccount(id: number, name: string, openingBalance: number){
+    return await this.instance.put(`/account/${id}`, {name, openingBalance})
   }
 
 }
