@@ -1,6 +1,6 @@
 "use client"
 
-import TransactionForm from "@/components/transaction-form/page"
+import TransactionForm from "@/components/transaction-form/TransactionForm"
 
 export default function NewIncome() {
   
