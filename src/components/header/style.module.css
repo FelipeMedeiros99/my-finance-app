@@ -6,7 +6,7 @@
   background-color: var(--color-analogous-2);
   height: var(--space-12);
 
-  z-index: 1;
+  z-index: 2;
 
   font-size: var(--font-size-3xl);
   color: var(--btn-alert-text);

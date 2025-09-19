@@ -9,7 +9,27 @@
   border: solid thin black;
   border-radius: var(--radius-md);
   justify-content: space-between;
-  padding: var(--space-2);
+  padding: var(--space-0) var(--space-2);
+  color: var(--gray-900);
+  position: relative;
+}
+
+.checkbox{
+  width: var(--font-size-2xl);
+  height: var(--font-size-2xl);
+  z-index: 1;
+}
+
+.link{
+  text-decoration: none; 
+  font-style: normal;
+  padding: var(--space-2) var(--space-0);
+  display: flex ;
+  width: 100%;
+  justify-content: space-between;
+  /* align-items: center; */
+  height: 100%;
+  /* padding: var(--space-2) var(--space-8) var(--space-2) var(--space-2) ; */
 }
 
 .containerGreen{
@@ -36,3 +56,28 @@
 .rightContainer{
   text-align: end;
 }
+
+.totalContainer{
+  display: flex;
+  justify-content: end;
+  width: 100%;
+
+  padding: var(--space-4) 0 0 0;
+}
+
+.table{
+  color: var(--gray-900);
+}
+
+.green{
+  color: var(--color-analogous-2);
+}
+
+.red{
+  color: var(--color-secondary);
+}
+
+.td{
+  padding-right: var(--space-1);
+}
+

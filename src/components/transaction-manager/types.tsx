@@ -27,3 +27,9 @@ export type Transaction = {
   value: number | string;
   wasConfirm: boolean;
 }
+
+export type ValuesInformation = {
+  total: string;
+  unconfirmedTotal: string;
+  confirmedTotal: string;
+}
