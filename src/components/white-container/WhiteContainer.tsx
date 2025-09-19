@@ -18,7 +18,7 @@ export default function WhiteContainer({ children, theme = "neutral", title, isL
     <>
       {isLoading &&
         <div className={styles.spinnerContainer}>
-          <ClipLoader size="100" color="#16A34A" />
+          <ClipLoader size="100px" color="#16A34A" />
         </div>
       }
       {!isLoading &&
