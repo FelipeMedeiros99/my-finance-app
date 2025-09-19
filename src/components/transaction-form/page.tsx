@@ -84,7 +84,7 @@ export default function TransactionForm({type}: Props) {
       setIsLoading(true)
       try {
         const accountsPromise = config.getAccountNames()
-        const categoriesPromise = config.getCategoryNames()
+        const categoriesPromise = config.getCategoryNames(type)
         const [accounts, categories] = await Promise.all([accountsPromise, categoriesPromise])
         setAccounts(accounts.data)
         setCategories(categories.data)
