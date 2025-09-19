@@ -18,11 +18,10 @@ export const getDateToday = () => {
   return `${year}-${month}-${day}`;
 }
 
-export const defaultValues: Form = {
+export const defaultValues: Omit<Form, "type"> = {
   description: "",
   value: "0.00",
   installments: 1,
-  type: "INCOME",
   recurrent: "Não recorrente",
   wasConfirm: true,
   dueDate: getDateToday(),

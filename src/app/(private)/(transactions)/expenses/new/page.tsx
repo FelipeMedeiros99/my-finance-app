@@ -1,7 +1,10 @@
-export default function New(){
+"use client"
+
+import TransactionForm from "@/components/transaction-form/page"
+
+export default function NewIncome() {
+  
   return(
-    <div>
-      new 
-    </div>
+    <TransactionForm type="EXPENSE"/>
   )
 }

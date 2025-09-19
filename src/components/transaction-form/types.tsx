@@ -1,3 +1,10 @@
+type TransactionType = "INCOME" | "EXPENSE"
+
+
+export type Props = {
+  type: TransactionType;
+}
+
 export type Form = {
   description: string;
   categoryId?: number;
@@ -8,7 +15,7 @@ export type Form = {
   installments: number
   category: string;
   account: string;
-  type: "INCOME" | "EXPENSE";
+  type: TransactionType;
   wasConfirm: boolean;
 
 }
