@@ -20,7 +20,7 @@ export function convertToMoneyFormat(value: string){
   return Number(value).toLocaleString("pt-BT", {style: "currency", currency: "BRL"})
 }
 
-export function convertToNumberFormat(value: string){
-  value = convertToStringNumber(value)
+export function convertToNumberFormat(value: string | number){
+  value = convertToStringNumber(String(value))
   return Number(value)
 }
