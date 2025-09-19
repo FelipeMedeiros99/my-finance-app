@@ -1,4 +1,4 @@
-import { Form as TransactionForm } from "@/app/(private)/incomes/new/types";
+import { Form as TransactionForm } from "@/app/(private)/(transactions)/incomes/new/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 class AxiosConfig {

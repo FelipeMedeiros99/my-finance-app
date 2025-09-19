@@ -7,6 +7,7 @@ export const rules = {
   recurrent: { required: { value: true, message: "Este campo é obrigatório" } },
   category: { required: { value: true, message: "Este campo é obrigatório" } },
   account: { required: { value: true, message: "Este campo é obrigatório" } },
+  installments: {min: {value: 1, message: "Quantidade mínima de 1 parcela"}}
 }
 
 export const getDateToday = () => {
