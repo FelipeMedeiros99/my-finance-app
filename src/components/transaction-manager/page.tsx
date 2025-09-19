@@ -18,7 +18,6 @@ export default function TransactionManager({type}: {type: "EXPENSE" | "INCOME"})
   const [isLoading, setIsLoading] = useState(true)
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-
   const getTransactions = async () => {
     setIsLoading(true)
     try {
@@ -54,7 +53,8 @@ export default function TransactionManager({type}: {type: "EXPENSE" | "INCOME"})
     (async () => {
       await getTransactions()
     })()
-  }, [date, getTransactions])
+  }, [date])
+
 
   return (
     <>
