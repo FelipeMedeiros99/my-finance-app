@@ -18,15 +18,18 @@ import { Accounts, Categories, Form } from "./types";
 import styles from "./style.module.css";
 
 export default function New() {
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<Form>({defaultValues: defaultValues});
+  const { register, reset, handleSubmit, setValue, watch, formState: { errors } } = useForm<Form>({defaultValues: defaultValues});
+  
   const [accounts, setAccounts] = useState<Accounts[]>([])
   const [categories, setCategories] = useState<Categories[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isFormDisabled, setIsFormDisabled] = useState<boolean>(false)
+
+
   const value = watch("value")
   const installments = watch("installments")
   const recurrent = watch("recurrent");
   const wasConfirm = watch("wasConfirm")
-  const router = useRouter()
 
   const formatData = (data: Form) => {
     
@@ -36,6 +39,7 @@ export default function New() {
     const accountData = accounts.find((account)=>account.name === data.account);
     if(accountData) data.accountId = accountData.id;
 
+    data.installments = Number(data.installments)
     data.value = convertToNumberFormat(data.value)
     
     return data
@@ -43,19 +47,22 @@ export default function New() {
 
 
   const onSubmit = async(data: Form) => {
+    setIsFormDisabled(true)
     try{
       data = formatData(data);
       const response = await config.createTransaction(data);
       if(response.status === 201){
-        router.push("/incomes")
+        alert("Transação criada com sucesso!")
+        reset()
       }
     }catch(e){
       if(e instanceof AxiosError){
         console.log(e?.response?.data)
-        return
+      }else{
+        console.log(e)
       }
-      console.log(e)
     }
+    setIsFormDisabled(false)
   };
 
   useEffect(() => {
@@ -65,6 +72,12 @@ export default function New() {
   useEffect(() => {
     setValue("installments", Number(filterNumbers(String(installments))))
   }, [installments, setValue])
+
+  useEffect(() => {
+    if(recurrent === "Não recorrente"){
+      setValue("installments", 1)
+    }
+  }, [recurrent, setValue])
 
   useEffect(() => {
     (async () => {
@@ -86,17 +99,17 @@ export default function New() {
     <WhiteContainer theme="green" title="Nova Receita" isLoading={isLoading}>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputs}>
-          <Input error={errors.description?.message} {...register("description", rules.description)} label="Descrição: " placeholder="Ex: Salário" />
-          <Input error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00"/>
-          <Input error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
-          <Select error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado", "Fixo Mensal"]} />
-          {recurrent === "Parcelado" && <Input error={errors.installments?.message} {...register("installments", rules.installments)} label="Numero de parcelas" type="number"/> }
-          <Select error={errors.category?.message} {...register("category", rules.category)} label="Categoria: " options={categories.map((category) => (category.name))} />
-          <Select error={errors.account?.message} {...register("account", rules.account)} label="Conta: " options={accounts.map((account) => (account.name))} />          
-          <Checkbox label={wasConfirm ? "Confirmado" : "Não confirmado"} {...register("wasConfirm")}/>
+          <Input disabled={isFormDisabled} error={errors.description?.message} {...register("description", rules.description)} label="Descrição: " placeholder="Ex: Salário" />
+          <Input disabled={isFormDisabled} error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00"/>
+          <Input disabled={isFormDisabled} error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
+          <Select disabled={isFormDisabled} error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado", "Fixo Mensal"]} />
+          {recurrent === "Parcelado" && <Input disabled={isFormDisabled} error={errors.installments?.message} {...register("installments", rules.installments)} label="Numero de parcelas" type="number"/> }
+          <Select disabled={isFormDisabled} error={errors.category?.message} {...register("category", rules.category)} label="Categoria: " options={categories.map((category) => (category.name))} />
+          <Select disabled={isFormDisabled} error={errors.account?.message} {...register("account", rules.account)} label="Conta: " options={accounts.map((account) => (account.name))} />          
+          <Checkbox disabled={isFormDisabled} label={wasConfirm ? "Confirmado" : "Não confirmado"} {...register("wasConfirm")}/>
         </div>
 
-        <button className="btn success" type="submit">Salvar</button>
+        <button disabled={isFormDisabled} className="btn success" type="submit">Salvar</button>
       </form>
     </WhiteContainer>
   )
