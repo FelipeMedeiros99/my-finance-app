@@ -11,6 +11,7 @@ import { convertToMoneyFormat, convertToNumberFormat, convertToStringNumber } fr
 import WhiteContainer from "@/components/white-container/WhiteContainer"
 import Input from "@/components/input/Input";
 import Modal from "@/components/modal/Modal";
+import TopDate from "@/components/top-date/TopDate";
 
 import styles from "./style.module.css"
 import { rules } from "./const";
@@ -29,8 +30,9 @@ type AccountModel = {
 
 
 export default function Accounts() {
-  const [accounts, setAccounts] = useState([])
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [accounts, setAccounts] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [date, setDate] = useState(new Date());
 
   const { register, setValue, setError, handleSubmit, watch, formState: { errors } } = useForm<Form>({
     defaultValues: {
@@ -38,8 +40,8 @@ export default function Accounts() {
       openingBalance: "R$ 0.00",
       id: null
     }
-  })
-  const openingBalance = watch("openingBalance")
+  });
+  const openingBalance = watch("openingBalance");
 
   const onSubmit: SubmitHandler<Form> = async (data: Form) => {
     data.openingBalance = convertToNumberFormat(String(data.openingBalance))
@@ -114,7 +116,7 @@ export default function Accounts() {
 
   return (
     <React.Fragment>
-
+      <TopDate date={date} setDate={setDate} />
       <WhiteContainer title="Contas" theme={"neutral"}>
         <FaPlusCircle className={styles.icon} onClick={() => openModal()} />
         <div className={styles.categoryContainer}>
