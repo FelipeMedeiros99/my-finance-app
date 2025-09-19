@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 
 import WhiteContainer from "@/components/white-container/WhiteContainer";
 import Input from "@/components/input/Input";
@@ -19,7 +18,7 @@ import styles from "./style.module.css";
 
 
 export default function TransactionForm({type}: Props) {
-  const { register, reset, handleSubmit, setValue, watch, formState: { errors } } = useForm<Form>({defaultValues: {...defaultValues, type}});
+  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<Form>({defaultValues: {...defaultValues, type}});
   
   const [accounts, setAccounts] = useState<Accounts[]>([])
   const [categories, setCategories] = useState<Categories[]>([])
@@ -93,7 +92,7 @@ export default function TransactionForm({type}: Props) {
       }
       setIsLoading(false)
     })()
-  }, [setIsLoading, setAccounts, setCategories])
+  }, [setIsLoading, setAccounts, setCategories, type])
 
   return (
     <WhiteContainer theme={type === "EXPENSE" ? "red" : type==="INCOME" ? "green" : "neutral"} title={type==="EXPENSE" ? "Nova Despesa" : type==="INCOME" ? "Nova Receita": "Nova Transação"} isLoading={isLoading}>

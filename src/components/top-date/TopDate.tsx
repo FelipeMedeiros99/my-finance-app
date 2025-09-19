@@ -11,9 +11,6 @@ type Props = {
 }
 
 export default function TopDate({date, setDate}: Props){
-  
-  const year = date.toLocaleString("pt-br", {year: "2-digit"})
-  const month = date.toLocaleString("pt-BR", { month: "long" })
   const now = new Date()
 
   const formatTitle = ()=>{

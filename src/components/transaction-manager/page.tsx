@@ -47,14 +47,14 @@ export default function TransactionManager({type}: {type: "EXPENSE" | "INCOME"})
         console.log(e)
       }
     }
-
+    
   }
 
   useEffect(() => {
     (async () => {
       await getTransactions()
     })()
-  }, [date])
+  }, [date, getTransactions])
 
   return (
     <>
@@ -62,10 +62,10 @@ export default function TransactionManager({type}: {type: "EXPENSE" | "INCOME"})
       <WhiteContainer title={type==="EXPENSE" ? "Saídas": type==="INCOME" ? "Entradas" : ""} theme={type==="EXPENSE" ? "red": type==="INCOME" ? "green" : "neutral"} isLoading={isLoading}>
         <div className={styles.transactionsContainer}>
 
-        {transactions.map((transction) => {
+        {transactions.map((transction, index) => {
           const formatedDate = formatToDate(new Date(transction.dueDate));
           return (
-            <div className={`${styles.transactionContainer} ${styles.containerGreen}`}>
+            <div key={index} className={`${styles.transactionContainer} ${styles.containerGreen}`}>
               <div className={styles.transactionDescriptions}>
                 <Checkbox checked={transction.wasConfirm} onChange={()=>toggleConfirmation(transction)}/>
                 <div>
