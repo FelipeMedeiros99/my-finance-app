@@ -1,4 +1,4 @@
-import { Form as TransactionForm } from "@/app/(private)/(transactions)/incomes/new/types";
+import { Form as TransactionForm } from "@/components/transaction-form/types"; 
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 class AxiosConfig {
@@ -45,8 +45,8 @@ class AxiosConfig {
     return await this.instance.get("/category");
   }
 
-  async getCategoryNames(){
-    return await this.instance.get("/category/names");
+async getCategoryNames(type: "INCOME" | "EXPENSE"){
+    return await this.instance.get(`/category/names?type=${type}`);
   }
 
   async deleteCategory(id: number){
