@@ -1,0 +1,16 @@
+.dateContainer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.icon{
+  font-size: var(--font-size-2xl);
+}
+
+.h1{
+  min-width: var(--space-40);
+  text-align: center;
+}
