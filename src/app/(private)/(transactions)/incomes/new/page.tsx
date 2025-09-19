@@ -9,7 +9,7 @@ import WhiteContainer from "@/components/white-container/WhiteContainer";
 import Input from "@/components/input/Input";
 import Checkbox from "@/components/checkbox/Checkbox";
 import Select from "@/components/select/Select";
-import { convertToNumberFormat, convertToStringNumber } from "@/utils/numberFunctions";
+import { convertToNumberFormat, convertToStringNumber, filterNumbers } from "@/utils/numberFunctions";
 import config from "@/config";
 
 import { defaultValues, rules } from "./const";
@@ -23,6 +23,7 @@ export default function New() {
   const [categories, setCategories] = useState<Categories[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const value = watch("value")
+  const installments = watch("installments")
   const recurrent = watch("recurrent");
   const wasConfirm = watch("wasConfirm")
   const router = useRouter()
@@ -62,6 +63,10 @@ export default function New() {
   }, [value, setValue])
 
   useEffect(() => {
+    setValue("installments", Number(filterNumbers(String(installments))))
+  }, [installments, setValue])
+
+  useEffect(() => {
     (async () => {
       setIsLoading(true)
       try {
@@ -82,7 +87,7 @@ export default function New() {
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputs}>
           <Input error={errors.description?.message} {...register("description", rules.description)} label="Descrição: " placeholder="Ex: Salário" />
-          <Input error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00" type="number"/>
+          <Input error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00"/>
           <Input error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
           <Select error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado", "Fixo Mensal"]} />
           {recurrent === "Parcelado" && <Input error={errors.installments?.message} {...register("installments", rules.installments)} label="Numero de parcelas" type="number"/> }
