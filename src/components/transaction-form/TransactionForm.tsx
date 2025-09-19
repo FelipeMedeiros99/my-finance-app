@@ -52,8 +52,8 @@ export default function TransactionForm({type}: Props) {
       data = formatData(data);
       const response = await config.createTransaction(data);
       if(response.status === 201){
-        alert("Transação criada com sucesso!")
-        reset()
+        // alert("Transação criada com sucesso!")
+        // reset()
       }
     }catch(e){
       if(e instanceof AxiosError){

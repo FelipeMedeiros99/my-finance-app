@@ -14,7 +14,8 @@ export function convertToStringNumber(value: string){
 }
 
 
-export function convertToMoneyFormat(value: string){
+export function convertToMoneyFormat(value: string|number){
+  value = String(value)
   value = convertToStringNumber(value)
 
   return Number(value).toLocaleString("pt-BT", {style: "currency", currency: "BRL"})

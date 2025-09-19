@@ -1,4 +1,5 @@
 import { Form as TransactionForm } from "@/components/transaction-form/types"; 
+import { Transaction } from "@/components/transaction-manager/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 class AxiosConfig {
@@ -87,6 +88,13 @@ async getCategoryNames(type: "INCOME" | "EXPENSE"){
     return await this.instance.post("/transaction", data)
   }
 
+  async getTransaction(date?: Date, type?: "INCOME"|"EXPENSE"){
+    return await this.instance.get(`/transaction?date=${date}&type=${type}`)
+  }
+
+  async updateTransaction(data: Transaction, transactionId: number){
+    return await this.instance.put(`/transaction/${transactionId}`, data)
+  }
 }
 
 const config = new AxiosConfig();
