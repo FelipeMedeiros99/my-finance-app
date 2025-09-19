@@ -1,3 +1,4 @@
+import { Form as TransactionForm } from "@/app/(private)/incomes/new/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
 
 class AxiosConfig {
@@ -79,6 +80,11 @@ class AxiosConfig {
 
   async editAccount(id: number, name: string, openingBalance: number){
     return await this.instance.put(`/account/${id}`, {name, openingBalance})
+  }
+
+  // ================== transaction ==================
+  async createTransaction(data: TransactionForm){
+    return await this.instance.post("/transaction", data)
   }
 
 }
