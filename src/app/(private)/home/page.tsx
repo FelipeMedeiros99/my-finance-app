@@ -7,53 +7,9 @@ import WhiteContainer from "@/components/white-container/WhiteContainer";
 import config from "@/config";
 import { Transaction } from "@/components/transaction-manager/types";
 import { convertToMoneyFormat } from "@/utils/numberFunctions";
+import BalanceTable from "@/components/balance-table/BalanceTable";
 
-import styles from "./styles.module.css"
-
-type TableProps = {
-  type: "EXPENSE" | "INCOME";
-  data: Transaction[];
-}
-
-const Table = ({ type, data }: TableProps) => {
-  const [informations, setInformations] = useState({ confirmed: 0, prevpredicted: 0, total:0 })
-
-  useEffect(()=>{
-      const total = data.reduce((aggregate, data) => aggregate + Number(data.value), 0)
-      const confirmed = data.reduce((aggregate, data) => {
-        if (data.wasConfirm) {
-          return aggregate + Number(data.value);
-        }
-        return aggregate;
-      }, 0)
-      const prevpredicted = total - confirmed;
-
-      setInformations({ confirmed, prevpredicted, total })
-
-  }, [data])
-
-  return (
-    <div className={`${styles.containerTable} ${type === "INCOME" ? styles.green : styles.red}`}>
-      <table className={styles.table}>
-        <caption className={`${styles.td} ${type === "INCOME" ? styles.green : styles.red}`}>{type === "INCOME" ? "Receitas" : "Despesas"}</caption>
-        <tbody>
-          <tr>
-            <td className={`${styles.td} ${type === "INCOME" ? styles.green : styles.red}`}>Confirmado</td>
-            <td className={`${styles.td} ${type === "INCOME" ? styles.green : styles.red} ${styles.tdRight}`}>{convertToMoneyFormat(informations.confirmed)}</td>
-          </tr>
-          <tr>
-            <td className={`${styles.td} ${type === "INCOME" ? styles.green : styles.red}`}>Previsto</td>
-            <td className={`${styles.td} ${type === "INCOME" ? styles.green : styles.red} ${styles.tdRight}`}>{convertToMoneyFormat(informations.prevpredicted)}</td>
-          </tr>
-          <tr>
-            <td className={`${styles.total} ${styles.td} ${type === "INCOME" ? styles.green : styles.red}`}>Total</td>
-            <td className={`${styles.total} ${styles.td} ${type === "INCOME" ? styles.green : styles.red} ${styles.tdRight}`}>{convertToMoneyFormat(informations.total)}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
-}
+import styles from "./style.module.css"
 
 export default function Home() {
   const [date, setDate] = useState(new Date())
@@ -72,8 +28,6 @@ export default function Home() {
     })()
   }, [date])
 
-  console.log(balance)
-
   useEffect(()=>{
     const total = transactions.reduce((acc, data)=>{
       if(data.type==="EXPENSE"){
@@ -90,8 +44,8 @@ export default function Home() {
       <TopDate date={date} setDate={setDate} />
       <WhiteContainer title="Resumos">
         <div className={styles.containerTables}>
-          <Table type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
-          <Table type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
+          <BalanceTable type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
+          <BalanceTable type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
         </div>
 
         <p className={styles.balanceContainer}>
