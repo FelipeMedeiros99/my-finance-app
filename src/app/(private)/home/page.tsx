@@ -70,7 +70,9 @@ export default function Home() {
         console.log(e)
       }
     })()
-  }, [])
+  }, [date])
+
+  console.log(balance)
 
   useEffect(()=>{
     const total = transactions.reduce((acc, data)=>{

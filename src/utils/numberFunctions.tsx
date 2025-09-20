@@ -15,10 +15,11 @@ export function convertToStringNumber(value: string){
 
 
 export function convertToMoneyFormat(value: string|number){
-  value = String(value)
-  value = convertToStringNumber(value)
+  let newValue = String(value)
+  newValue = convertToStringNumber(newValue)
 
-  return Number(value).toLocaleString("pt-BT", {style: "currency", currency: "BRL"})
+  newValue =(Number(value)>=0?Number(newValue):-Number(newValue)).toLocaleString("pt-BT", {style: "currency", currency: "BRL"})
+  return newValue
 }
 
 export function convertToNumberFormat(value: string | number){
