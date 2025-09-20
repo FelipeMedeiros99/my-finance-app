@@ -88,8 +88,12 @@ async getCategoryNames(type: "INCOME" | "EXPENSE"){
     return await this.instance.post("/transaction", data)
   }
 
-  async getTransaction(query: string){
-    return await this.instance.get(`/transaction?${query}`)
+  async getTransaction(query?: string){
+    if(query){
+      return await this.instance.get(`/transaction?${query}`)
+    }else{
+      return await this.instance.get(`/transaction`)
+    }
   }
 
   async updateTransaction(data: Omit<Transaction, "userId"|"id"|"category"|"account">, transactionId: number){
