@@ -60,7 +60,7 @@ export default function TransactionForm({ type }: Props) {
     setIsFormDisabled(true)
     try {
       data = formatData(data);
-      console.log(data)
+      console.log("sending data :", data)
  
       let response;
       if (id) {
@@ -68,6 +68,7 @@ export default function TransactionForm({ type }: Props) {
       } else {
         response = await config.createTransaction(data);
       }
+      console.log("response: ", response)
       if (response.status === 201 || response.status === 200) {
         route.push(`/${type.toLowerCase()}s`)
         // alert("Transação criada com sucesso!")
@@ -103,12 +104,13 @@ export default function TransactionForm({ type }: Props) {
         try {
           const response = await config.getTransaction(`id=${id}`)
           const data = response.data[0]
+          console.log("data response: ", data)
 
           setValue("description", data.description)
           setValue("value", data.value)
           setValue("dueDate", new Date(data.dueDate).toISOString().split("T")[0])
           setValue("recurrent", data.recurrent)
-          setValue("installments", data.installments)
+          setValue("installments", 1)
           setValue("category", data.category.name)
           setValue("account", data.account.name)
           setValue("wasConfirm", data.wasConfirm)
@@ -142,7 +144,7 @@ export default function TransactionForm({ type }: Props) {
           <Input disabled={isFormDisabled} error={errors.description?.message} {...register("description", rules.description)} label="Descrição: " placeholder={type === "EXPENSE" ? "Ex: Aluguel" : type === "INCOME" ? "Ex: Salário" : "Ex: Transferência"} />
           <Input disabled={isFormDisabled} error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00" />
           <Input disabled={isFormDisabled} error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
-          <Select disabled={isFormDisabled} error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado", "Fixo Mensal"]} />
+          {!id && <Select disabled={isFormDisabled} error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado"]} />}
           {recurrent === "Parcelado" && <Input disabled={isFormDisabled} error={errors.installments?.message} {...register("installments", rules.installments)} label="Numero de parcelas" type="number" />}
           <Select disabled={isFormDisabled} error={errors.category?.message} {...register("category", rules.category)} label="Categoria: " options={categories.map((category) => (category.name))} />
           <Select disabled={isFormDisabled} error={errors.account?.message} {...register("account", rules.account)} label="Conta: " options={accounts.map((account) => (account.name))} />
