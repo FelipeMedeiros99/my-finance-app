@@ -7,8 +7,8 @@ export type Props = {
 
 export type Form = {
   description: string;
-  categoryId?: number;
-  accountId?: number
+  categoryId: number;
+  accountId: number
   value: string | number;
   dueDate: string | Date;
   recurrent: "Não recorrente" | "Parcelado" | "Fixo Mensal";

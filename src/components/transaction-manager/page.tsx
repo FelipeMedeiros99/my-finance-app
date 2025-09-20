@@ -43,7 +43,7 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
   const getTransactions = async () => {
     setIsLoading(true)
     try {
-      const response = await config.getTransaction(date, type)
+      const response = await config.getTransaction(`date=${date}&type=${type}`)
       setTransactions(response.data)
     } catch (e) {
       if (e instanceof AxiosError) {

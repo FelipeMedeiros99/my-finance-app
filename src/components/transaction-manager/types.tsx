@@ -19,8 +19,8 @@ export type Transaction = {
   account: Account;
   categoryId: number;
   category: Category;
-  description: number;
-  dueDate: Date;
+  description: string;
+  dueDate: Date | string;
   id: number;
   type: Type
   userId: number;
