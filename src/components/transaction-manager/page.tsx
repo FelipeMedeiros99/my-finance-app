@@ -1,5 +1,5 @@
 "use client"
-import { ChangeEvent, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { AxiosError } from "axios"
 // import { MdOpenInNew } from "react-icons/md";
 
@@ -117,18 +117,21 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
 
         <div className={styles.totalContainer}>
           <table className={styles.table}>
-            <tr>
-              <td className={styles.td}>Recebido: </td>
-              <td className={type == "INCOME" ? styles.green : styles.red}>{valuesInformations?.confirmedTotal}</td>
-            </tr>
-            <tr>
-              <td className={styles.td}>Pendente:</td>
-              <td className={type == "INCOME" ? styles.green : styles.red}>{valuesInformations?.unconfirmedTotal}</td>
-            </tr>
-            <tr>
-              <td className={`${styles.td} ${styles.strongText}`}>Total: </td>
-              <td className={`${styles.strongText} ${type == "INCOME" ? styles.green : styles.red}`}>{valuesInformations?.total}</td>
-            </tr>
+            <tbody>
+
+              <tr>
+                <td className={styles.td}>Recebido: </td>
+                <td className={type == "INCOME" ? styles.green : styles.red}>{valuesInformations?.confirmedTotal}</td>
+              </tr>
+              <tr>
+                <td className={styles.td}>Pendente:</td>
+                <td className={type == "INCOME" ? styles.green : styles.red}>{valuesInformations?.unconfirmedTotal}</td>
+              </tr>
+              <tr>
+                <td className={`${styles.td} ${styles.strongText}`}>Total: </td>
+                <td className={`${styles.strongText} ${type == "INCOME" ? styles.green : styles.red}`}>{valuesInformations?.total}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </WhiteContainer>

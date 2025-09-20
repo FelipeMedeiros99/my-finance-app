@@ -20,7 +20,6 @@ import styles from "./style.module.css";
 
 export default function TransactionForm({ type }: Props) {
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<Form>({ defaultValues: { ...defaultValues, type } });
-
   const [accounts, setAccounts] = useState<Accounts[]>([])
   const [categories, setCategories] = useState<Categories[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -118,7 +117,7 @@ export default function TransactionForm({ type }: Props) {
         }
       }
     })()
-  }, [])
+  }, [id, setValue])
 
   useEffect(() => {
     (async () => {

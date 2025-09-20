@@ -18,7 +18,7 @@ export const getDateToday = () => {
   return `${year}-${month}-${day}`;
 }
 
-export const defaultValues: Omit<Form, "type"> = {
+export const defaultValues: Omit<Form, "type"|"accountId"| "categoryId"> = {
   description: "",
   value: "0.00",
   installments: 1,
