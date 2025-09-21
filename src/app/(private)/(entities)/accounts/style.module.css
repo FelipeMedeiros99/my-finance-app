@@ -20,7 +20,7 @@
   right: var(--space-4);
   color: var(--color-primary);
   cursor: pointer;
-  z-index: 10;
+  z-index: 1;
 }
 
 /* --- CARD DA CONTA --- */

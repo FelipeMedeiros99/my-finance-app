@@ -92,20 +92,22 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
           {transactions.map((transaction, index) => {
             const formatedDate = formatToDate(new Date(transaction?.dueDate));
             return (
-
               <div key={index} className={`${styles.transactionContainer} ${type === "INCOME" ? styles.containerGreen : styles.containerRed}`}>
                 <Checkbox className={styles.checkbox} checked={transaction?.wasConfirm} onChange={() => toggleConfirmation(transaction)} />
                 {/* <MdOpenInNew className={styles.iconOpen}/>     */}
                 <Link href={`/${transaction.type.toLowerCase()}s/new?id=${transaction?.id}`} className={styles.link}>
                   <div className={styles.transactionDescriptions}>
                     <div>
-                      <p className={styles.OppacyText}>{transaction.account.name}</p>
-                      <p className={styles.strongText}>{transaction.description}</p>
-                      <p className={styles.OppacyText}>{transaction.category.name}</p>
+                      <h3 className={styles.title}>{transaction.description}</h3>
+                      <div className={styles.metadataContainer}>
+                        <p className={styles.OppacyText}>{transaction.account.name}</p>
+                        <p style={{opacity:'0.3'}}>•</p>
+                        <p className={styles.OppacyText}>{transaction.category.name}</p>
+                      </div>
                     </div>
                   </div>
                   <div className={styles.rightContainer}>
-                    <p className={styles.OppacyText}>Venc: {formatedDate.day}/{formatedDate.month}</p>
+                    <p className={`${styles.OppacyText} ${styles.smallText}`}>Venc: {formatedDate.day}/{formatedDate.month}</p>
                     <p >{convertToMoneyFormat(transaction.value)}</p>
                   </div>
                 </Link>

@@ -8,7 +8,7 @@
   height: auto; /* Allow height to adjust */
   padding: var(--space-4) var(--space-6); /* Use padding instead of a fixed height */
   background-color: var(--color-analogous-2);
-  z-index: 2;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: flex-end; /* Aligns the icon to the right */

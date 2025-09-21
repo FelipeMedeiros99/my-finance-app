@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import TopDate from "@/components/top-date/TopDate";
 import WhiteContainer from "@/components/white-container/WhiteContainer";
@@ -54,48 +54,125 @@ export default function Home() {
     }, 0)
     setBalance(total)
   }, [transactions])
-
+  // Código JSX do Home
   return (
-    <>
+    <React.Fragment>
+
       <TopDate date={date} setDate={setDate} />
-      <WhiteContainer title="Resumos">
-        <div className={styles.containerTables}>
-          <BalanceTable type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
-          <BalanceTable type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
-        </div>
 
-        <p className={styles.balanceContainer}>
-          <label>Balanço do mês: </label> <span className={`${styles.balance} ${balance > 0 ? styles.green : balance < 0 ? styles.red : ""}`}>{convertToMoneyFormat(balance)}</span>
-        </p>
-      </WhiteContainer>
+      <main className={styles.mainContent}>
 
+        {/* Seção de Resumos */}
+        <WhiteContainer title="Resumos">
+          <div className={styles.summaryTables}>
+            <BalanceTable type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
+            <BalanceTable type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
+          </div>
+          <div className={styles.balanceSummary}>
+            <p>
+              <span className={styles.label}>Balanço do mês: </span>
+              <span className={`${styles.balance} ${balance > 0 ? styles.green : balance < 0 ? styles.red : ""}`}>
+                {convertToMoneyFormat(balance)}
+              </span>
+            </p>
+          </div>
+        </WhiteContainer>
 
-      <WhiteContainer title="Contas">
-        <div className={styles.containerAccounts}>
-          <Link href={`/accounts`} className={styles.iconButton}>
+        {/* Seção de Contas */}
+        <WhiteContainer title="Contas">
+          <Link href={`/accounts`} className={styles.viewAllButton}>
             <MdOutlineOpenInNew />
           </Link>
-          {accounts?.map((account) => {
-            const currentValue = account?.transaction ? calculateConfirmedBalance(account.transaction): 0;
-            const predictedValue = account?.transaction ? calculateTotalBalance(account.transaction) : 0;
-          return(
+          <div className={styles.accountsGrid}>
+            {accounts?.map((account) => {
+              const currentValue = account?.transaction ? calculateConfirmedBalance(account.transaction) : 0;
+              const predictedValue = account?.transaction ? calculateTotalBalance(account.transaction) : 0;
+              return (
+                <div key={account.name} className={styles.accountCard}>
+                  <h3 className={styles.accountName}>{account.name}</h3>
+                  <div className={styles.accountValues}>
+                    <p className={styles.accountValueItem}>
+                      <span className={styles.label}>Saldo atual: </span>
+                      <span className={currentValue > 0 ? styles.green : currentValue < 0 ? styles.red : ""}>
+                        {convertToMoneyFormat(currentValue)}
+                      </span>
+                    </p>
+                    <p className={styles.accountValueItem}>
+                      <span className={styles.label}>Saldo previsto: </span>
+                      <span className={predictedValue > 0 ? styles.green : predictedValue < 0 ? styles.red : ""}>
+                        {convertToMoneyFormat(predictedValue)}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
 
-            <div key={account.name} className={styles.containerInfos}>
-              <h3 className={styles.titleAccount}>{account.name}</h3>
-              <p>Saldo atual: <span className={currentValue > 0 ? styles.green : currentValue < 0 ? styles.red : "" }>{convertToMoneyFormat(currentValue)}</span></p>
-              <p>saldo previsto: <span className={predictedValue > 0 ? styles.green : predictedValue < 0 ? styles.red : "" }>{convertToMoneyFormat(predictedValue)}</span></p>
-            </div>
-            )
-}
-          )}
-        </div>
+          <div className={styles.accountTotals}>
+            <p className={styles.strongText}>
+              <span className={styles.label}>Total: </span>
+              <span className={accountsBalanceTotal.total > 0 ? styles.green : accountsBalanceTotal.total < 0 ? styles.red : ""}>
+                {convertToMoneyFormat(accountsBalanceTotal.total)}
+              </span>
+            </p>
+            <p className={styles.weakText}>
+              <span className={styles.label}>Previsto: </span>
+              <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""}>
+                {convertToMoneyFormat(accountsBalanceTotal.predicted)}
+              </span>
+            </p>
+          </div>
 
-        <div className={styles.balanceContainer}>
-          <p><label htmlFor="currentBalance">Total: </label><span className={accountsBalanceTotal.total > 0 ? `${styles.green} ${styles.strongText}` : accountsBalanceTotal.total < 0 ? `${styles.red} ${styles.strongText}` : ""}  id="currentBalance">{convertToMoneyFormat(accountsBalanceTotal.total)}</span></p>
-          <p className={styles.weakText}><label htmlFor="predicted">Previsto:</label> <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""} id="predicted">{convertToMoneyFormat(accountsBalanceTotal.predicted)}</span></p>
-        </div>
+        </WhiteContainer>
 
-      </WhiteContainer>
-    </>
+      </main>
+    </React.Fragment>
   )
 }
+
+
+
+// return (
+//     <>
+//       <TopDate date={date} setDate={setDate} />
+//       <WhiteContainer title="Resumos">
+//         <div className={styles.containerTables}>
+//           <BalanceTable type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
+//           <BalanceTable type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
+//         </div>
+
+//         <p className={styles.balanceContainer}>
+//           <label>Balanço do mês: </label> <span className={`${styles.balance} ${balance > 0 ? styles.green : balance < 0 ? styles.red : ""}`}>{convertToMoneyFormat(balance)}</span>
+//         </p>
+//       </WhiteContainer>
+
+
+//       <WhiteContainer title="Contas">
+//         <div className={styles.containerAccounts}>
+//           <Link href={`/accounts`} className={styles.iconButton}>
+//             <MdOutlineOpenInNew />
+//           </Link>
+//           {accounts?.map((account) => {
+//             const currentValue = account?.transaction ? calculateConfirmedBalance(account.transaction): 0;
+//             const predictedValue = account?.transaction ? calculateTotalBalance(account.transaction) : 0;
+//           return(
+
+//             <div key={account.name} className={styles.containerInfos}>
+//               <h3 className={styles.titleAccount}>{account.name}</h3>
+//               <p>Saldo atual: <span className={currentValue > 0 ? styles.green : currentValue < 0 ? styles.red : "" }>{convertToMoneyFormat(currentValue)}</span></p>
+//               <p>saldo previsto: <span className={predictedValue > 0 ? styles.green : predictedValue < 0 ? styles.red : "" }>{convertToMoneyFormat(predictedValue)}</span></p>
+//             </div>
+//             )
+// }
+//           )}
+//         </div>
+
+//         <div className={styles.balanceContainer}>
+//           <p><label htmlFor="currentBalance">Total: </label><span className={accountsBalanceTotal.total > 0 ? `${styles.green} ${styles.strongText}` : accountsBalanceTotal.total < 0 ? `${styles.red} ${styles.strongText}` : ""}  id="currentBalance">{convertToMoneyFormat(accountsBalanceTotal.total)}</span></p>
+//           <p className={styles.weakText}><label htmlFor="predicted">Previsto:</label> <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""} id="predicted">{convertToMoneyFormat(accountsBalanceTotal.predicted)}</span></p>
+//         </div>
+
+//       </WhiteContainer>
+//     </>
+// )
