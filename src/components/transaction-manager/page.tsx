@@ -15,6 +15,79 @@ import styles from "./style.module.css"
 import Link from "next/link"
 
 
+const DescriptionTransactionBox = ({ transaction, toggleConfirmation }: { transaction: Transaction, toggleConfirmation: (transaction: Transaction) => void }) => {
+  const formatedDate = formatToDate(new Date(transaction?.dueDate));
+  return (
+    <div className={`${styles.descriptionTransactionBox}`}>
+
+      <Checkbox className={styles.checkbox} checked={transaction?.wasConfirm} onChange={() => toggleConfirmation(transaction)} />
+
+      <Link className={styles.link} href={`/${transaction.type.toLowerCase()}s/new?id=${transaction?.id}`}>
+
+        <div className={styles.transactionDescriptions}>
+          <div>
+            <h2 className={styles.transactionTitle}>{transaction.description}</h2>
+            <div className={styles.metadataContainer}>
+              <p>{transaction.account.name}</p>
+              <p>•</p>
+              <p>{transaction.category.name}</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div className={styles.rightContainer}>
+          <p>Venc: {formatedDate.day}/{formatedDate.month}</p>
+          <strong className={styles.transactionValue}>{convertToMoneyFormat(transaction.value)}</strong>
+        </div>
+
+      </Link>
+
+    </div>
+  )
+}
+
+const TotalTableContainer = (
+  { type, valuesInformations }: {
+    type: "INCOME" | "EXPENSE",
+    valuesInformations?: ValuesInformation
+  }) => {
+  return (
+    <div className={styles.containerTotals}>
+      <div className={styles.totalTransactionsContainer}>
+        <strong style={{ fontSize: "var(--font-size-sm)" }}>Total previsto</strong>
+        <strong className={type==="EXPENSE" ? styles.valuesRed : styles.valuesGreen}>{valuesInformations?.total}</strong>
+      </div>
+      <div className={styles.subtotalsTransactions}>
+        <div className={styles.subtotalsTransactionsRows}>
+          <p className={styles.itemLeft}>Confirmado:</p>
+          <p className={styles.itemRight}>{valuesInformations?.confirmedTotal}</p>
+        </div>
+        <div className={styles.subtotalsTransactionsRows}>
+          <p className={styles.itemLeft}>Pendente:</p>
+          <p className={styles.itemRight}>{valuesInformations?.unconfirmedTotal}</p>
+        </div>
+      </div>
+      {/* <table className={styles.table}>
+        <tbody>
+          <tr>
+            <td>Total: </td>
+            <td>{valuesInformations?.total}</td>
+          </tr>
+          <tr>
+            <td>Recebido: </td>
+            <td>{valuesInformations?.confirmedTotal}</td>
+          </tr>
+          <tr>
+            <td>Pendente:</td>
+            <td>{valuesInformations?.unconfirmedTotal}</td>
+          </tr>
+        </tbody>
+      </table> */}
+    </div>
+  )
+}
+
 export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME" }) {
   const [date, setDate] = useState(new Date())
   const [isLoading, setIsLoading] = useState(true)
@@ -89,35 +162,15 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
       <WhiteContainer title={type === "EXPENSE" ? "Saídas" : type === "INCOME" ? "Entradas" : ""} theme={type === "EXPENSE" ? "red" : type === "INCOME" ? "green" : "neutral"} isLoading={isLoading}>
         <div className={styles.transactionsContainer}>
 
-          {transactions.map((transaction, index) => {
-            const formatedDate = formatToDate(new Date(transaction?.dueDate));
-            return (
-              <div key={index} className={`${styles.transactionContainer} ${type === "INCOME" ? styles.containerGreen : styles.containerRed}`}>
-                <Checkbox className={styles.checkbox} checked={transaction?.wasConfirm} onChange={() => toggleConfirmation(transaction)} />
-                {/* <MdOpenInNew className={styles.iconOpen}/>     */}
-                <Link href={`/${transaction.type.toLowerCase()}s/new?id=${transaction?.id}`} className={styles.link}>
-                  <div className={styles.transactionDescriptions}>
-                    <div>
-                      <h3 className={styles.title}>{transaction.description}</h3>
-                      <div className={styles.metadataContainer}>
-                        <p className={styles.OppacyText}>{transaction.account.name}</p>
-                        <p style={{opacity:'0.3'}}>•</p>
-                        <p className={styles.OppacyText}>{transaction.category.name}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.rightContainer}>
-                    <p className={`${styles.OppacyText} ${styles.smallText}`}>Venc: {formatedDate.day}/{formatedDate.month}</p>
-                    <p >{convertToMoneyFormat(transaction.value)}</p>
-                  </div>
-                </Link>
-              </div>
+          <TotalTableContainer type={type} valuesInformations={valuesInformations} />
 
-            )
-          })}
+
+          {transactions.map((transaction) => (
+            <DescriptionTransactionBox key={transaction.id} transaction={transaction} toggleConfirmation={toggleConfirmation} />
+          ))}
         </div>
 
-        <div className={styles.totalContainer}>
+        {/* <div className={styles.totalContainer}>
           <table className={styles.table}>
             <tbody>
 
@@ -135,7 +188,7 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
       </WhiteContainer>
     </>
   )
