@@ -1,23 +1,71 @@
-.containerTables{
+/* resumos */
+
+.containerTables {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.balanceContainer{
+.balanceContainer {
   padding: var(--space-5) 0;
 }
 
-.balance{
+.balance {
   font-weight: var(--font-weights-bold);
 }
 
-.green{
+.green {
   color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-.red{
+.red {
   color: var(--color-secondary);
   border-color: var(--color-secondary);
+}
+
+/* accounts */
+
+.containerAccounts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+} 
+
+.titleAccount{
+  padding-bottom: var(--space-2);
+}
+
+.iconButton {
+  all: unset;
+
+  display: flex;
+  justify-content: end;
+
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+
+  width: var(--space-8);
+  height: var(--space-8);
+}
+
+.containerInfos{
+  border: solid 1px black;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.totalsContainer{
+  padding-top: var(--space-5);
+}
+
+.strongText{
+  font-weight: var(--font-weights-bold);
+
+}
+
+.weakText{
+  /* font-weight: var(--font-weights-light); */
+  opacity: .5;
 }

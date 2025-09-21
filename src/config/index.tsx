@@ -63,8 +63,8 @@ async getCategoryNames(type: "INCOME" | "EXPENSE"){
   }
 
   // ============ Accounts ============ 
-  async getAccounts(){
-    return await this.instance.get("/account");
+  async getAccounts(query: string){
+    return await this.instance.get(query?`/account?${query}`:"/account");
   }
 
   async getAccountNames(){
@@ -89,11 +89,7 @@ async getCategoryNames(type: "INCOME" | "EXPENSE"){
   }
 
   async getTransaction(query?: string){
-    if(query){
-      return await this.instance.get(`/transaction?${query}`)
-    }else{
-      return await this.instance.get(`/transaction`)
-    }
+    return await this.instance.get(query?`/transaction?${query}`:"/transaction")
   }
 
   async updateTransaction(data: Omit<Transaction, "userId"|"id"|"category"|"account">, transactionId: number){

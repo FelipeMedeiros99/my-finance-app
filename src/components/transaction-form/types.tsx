@@ -1,3 +1,5 @@
+import { Transaction } from "../transaction-manager/types";
+
 type TransactionType = "INCOME" | "EXPENSE"
 
 
@@ -22,7 +24,10 @@ export type Form = {
 
 export type Accounts = {
   name: string;
-  id: number
+  id: number;
+  openingBalance: number | string;
+  createdAt: Date;
+  transaction?: Transaction[]
 }
 
 export type Categories = {
