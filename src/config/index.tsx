@@ -63,7 +63,7 @@ async getCategoryNames(type: "INCOME" | "EXPENSE"){
   }
 
   // ============ Accounts ============ 
-  async getAccounts(query: string){
+  async getAccounts(query?: string){
     return await this.instance.get(query?`/account?${query}`:"/account");
   }
 
