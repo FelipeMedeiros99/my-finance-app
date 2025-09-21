@@ -1,4 +1,67 @@
-.header{
+.header {
+  border-bottom: solid 1px #c0c0c0;
+  box-shadow: 0 0.2rem 0.2rem #c3c3c38f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto; /* Allow height to adjust */
+  padding: var(--space-4) var(--space-6); /* Use padding instead of a fixed height */
+  background-color: var(--color-analogous-2);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Aligns the icon to the right */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+}
+
+.icon {
+  font-size: var(--font-size-2xl); /* Make icon a little smaller for a clean look */
+  color: var(--btn-alert-text);
+  cursor: pointer;
+}
+
+.nav {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  width: 250px; 
+  max-height: 80vh; 
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+  overflow: hidden; 
+  z-index: 10;
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  all: unset;
+  display: block;
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-size-md);
+  color: var(--color-gray-900);
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.link:hover {
+  background-color: var(--color-analogous-1);
+}
+
+.linkActive {
+  background-color: var(--color-analogous-1);
+  font-weight: bold;
+  color: white;
+}
+
+/* .header{
   position: fixed;
   top: 0;
   left: 0;
@@ -53,4 +116,4 @@
 .linkActive{
   color: var(--gray-100);
   background-color: var(--color-analogous-1)
-}
+} */
