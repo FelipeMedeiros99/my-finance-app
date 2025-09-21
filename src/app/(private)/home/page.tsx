@@ -131,7 +131,7 @@ export default function Home() {
             <MdOutlineOpenInNew />
           </Link>
           {accounts?.map((account) => (
-            <div className={styles.containerInfos}>
+            <div key={account.name} className={styles.containerInfos}>
               <h3 className={styles.titleAccount}>{account.name}</h3>
               <p>Saldo atual: {account?.transaction ? convertToMoneyFormat(calculateConfirmedBalance(account.transaction)) : ""}</p>
               <p>saldo previsto: {account?.transaction ? convertToMoneyFormat(calculateTotalBalance(account.transaction)) : ""}</p>
