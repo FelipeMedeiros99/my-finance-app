@@ -6,7 +6,7 @@ import TopDate from "@/components/top-date/TopDate";
 import WhiteContainer from "@/components/white-container/WhiteContainer";
 import config from "@/config";
 import { Transaction } from "@/components/transaction-manager/types";
-import { convertToMoneyFormat } from "@/utils/numberFunctions";
+import { calculateConfirmedBalance, calculateTotalBalance, calculateFullTotalsFromAllAccountsTransactions, convertToMoneyFormat } from "@/utils/numberFunctions";
 import BalanceTable from "@/components/balance-table/BalanceTable";
 
 import styles from "./style.module.css"
@@ -21,66 +21,11 @@ export default function Home() {
   const [balance, setBalance] = useState(0)
   const [accountsBalanceTotal, setAccountsBalanceTotal] = useState({ predicted: 0, total: 0 })
 
-  const calculateConfirmedBalance = (accounts: Transaction[]) => {
-    const total = accounts.reduce((accumulate, data) => {
-      if (data.type === "EXPENSE" && data.wasConfirm) {
-        return accumulate - Number(data.value)
-      } else if (data.type === "INCOME" && data.wasConfirm) {
-        return accumulate + Number(data.value)
-      } else {
-        return accumulate
-      }
-    }, 0)
-
-    return total
-  }
-
-  const calculateTotalBalance = (accounts: Transaction[]) => {
-    const total = accounts.reduce((accumulate, data) => {
-      if (data.type === "EXPENSE") {
-        return accumulate - Number(data.value)
-      } else if (data.type === "INCOME") {
-        return accumulate + Number(data.value)
-      } else {
-        return accumulate
-      }
-    }, 0)
-
-    return total
-  }
-
-
   useEffect(() => {
-    const accountTotal = accounts.reduce((aggregate, data) => {
-      let values = { predicted: 0, total: 0 }
-      if (data.transaction) {
-        values = data.transaction.reduce((aggregate2, data) => {
-          if (data.type === "EXPENSE") {
-            aggregate2.predicted -= Number(data.value);
-            if (data.wasConfirm) {
-              aggregate2.total -= Number(data.value);
-            }
-            return aggregate2
-          } else if (data.type === "INCOME") {
-            aggregate2.predicted += Number(data.value);
-            if (data.wasConfirm) {
-              aggregate2.total += Number(data.value);
-            }
-            return aggregate2
-          } else {
-            return aggregate2
-          }
-        }, { predicted: 0, total: 0 })
-      }
-      aggregate.predicted += values.predicted;
-      aggregate.total += values.total;
-      return aggregate
-    }, { predicted: 0, total: 0 })
-
+    const accountTotal = calculateFullTotalsFromAllAccountsTransactions(accounts);
     setAccountsBalanceTotal(accountTotal)
   }, [accounts])
 
-  console.log(accountsBalanceTotal)
 
   useEffect(() => {
     (async () => {
@@ -130,18 +75,24 @@ export default function Home() {
           <Link href={`/accounts`} className={styles.iconButton}>
             <MdOutlineOpenInNew />
           </Link>
-          {accounts?.map((account) => (
+          {accounts?.map((account) => {
+            const currentValue = account?.transaction ? calculateConfirmedBalance(account.transaction): 0;
+            const predictedValue = account?.transaction ? calculateTotalBalance(account.transaction) : 0;
+          return(
+
             <div key={account.name} className={styles.containerInfos}>
               <h3 className={styles.titleAccount}>{account.name}</h3>
-              <p>Saldo atual: {account?.transaction ? convertToMoneyFormat(calculateConfirmedBalance(account.transaction)) : ""}</p>
-              <p>saldo previsto: {account?.transaction ? convertToMoneyFormat(calculateTotalBalance(account.transaction)) : ""}</p>
+              <p>Saldo atual: <span className={currentValue > 0 ? styles.green : currentValue < 0 ? styles.red : "" }>{convertToMoneyFormat(currentValue)}</span></p>
+              <p>saldo previsto: <span className={predictedValue > 0 ? styles.green : predictedValue < 0 ? styles.red : "" }>{convertToMoneyFormat(predictedValue)}</span></p>
             </div>
-          ))}
+            )
+}
+          )}
         </div>
 
         <div className={styles.balanceContainer}>
-          <p><label htmlFor="currentBalance">Saldo atual: </label><span className={accountsBalanceTotal.total > 0 ? `${styles.green} ${styles.strongText}` : accountsBalanceTotal.total < 0 ? `${styles.red} ${styles.strongText}` : ""}  id="currentBalance">{convertToMoneyFormat(accountsBalanceTotal.total)}</span></p>
-          <p className={styles.weakText}><label htmlFor="predicted">Saldo previsto:</label> <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""} id="predicted">{convertToMoneyFormat(accountsBalanceTotal.predicted)}</span></p>
+          <p><label htmlFor="currentBalance">Total: </label><span className={accountsBalanceTotal.total > 0 ? `${styles.green} ${styles.strongText}` : accountsBalanceTotal.total < 0 ? `${styles.red} ${styles.strongText}` : ""}  id="currentBalance">{convertToMoneyFormat(accountsBalanceTotal.total)}</span></p>
+          <p className={styles.weakText}><label htmlFor="predicted">Previsto:</label> <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""} id="predicted">{convertToMoneyFormat(accountsBalanceTotal.predicted)}</span></p>
         </div>
 
       </WhiteContainer>

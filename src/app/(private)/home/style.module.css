@@ -66,6 +66,6 @@
 }
 
 .weakText{
-  /* font-weight: var(--font-weights-light); */
-  opacity: .5;
+  font-weight: var(--font-weights-light);
+  /* opacity: .5; */
 }
