@@ -107,6 +107,7 @@
   justify-content: center;
   align-items: center;
   padding: var(--space-3);
+  gap: var(--space-2);
 
   /* box-shadow: var(--box-shadow-settings); */
   border: var(--border-settings);
@@ -114,7 +115,7 @@
 
   background-color: var(--gray-100);
 
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weights-bold);
 }
 

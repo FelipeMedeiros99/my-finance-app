@@ -163,32 +163,9 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
         <div className={styles.transactionsContainer}>
 
           <TotalTableContainer type={type} valuesInformations={valuesInformations} />
-
-
-          {transactions.map((transaction) => (
-            <DescriptionTransactionBox key={transaction.id} transaction={transaction} toggleConfirmation={toggleConfirmation} />
-          ))}
+          
+          {transactions.map((transaction) => <DescriptionTransactionBox key={transaction.id} transaction={transaction} toggleConfirmation={toggleConfirmation} />)}
         </div>
-
-        {/* <div className={styles.totalContainer}>
-          <table className={styles.table}>
-            <tbody>
-
-              <tr>
-                <td className={styles.td}>Recebido: </td>
-                <td className={type == "INCOME" ? styles.green : styles.red}>{valuesInformations?.confirmedTotal}</td>
-              </tr>
-              <tr>
-                <td className={styles.td}>Pendente:</td>
-                <td className={type == "INCOME" ? styles.green : styles.red}>{valuesInformations?.unconfirmedTotal}</td>
-              </tr>
-              <tr>
-                <td className={`${styles.td} ${styles.strongText}`}>Total: </td>
-                <td className={`${styles.strongText} ${type == "INCOME" ? styles.green : styles.red}`}>{valuesInformations?.total}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
       </WhiteContainer>
     </>
   )

@@ -15,9 +15,7 @@ type TableProps = {
 };
 
 export default function BalanceTable({ type, data }: TableProps) {
-  // useMemo é mais eficiente aqui. Ele recalcula os totais apenas quando 'data' muda.
   const totals = useMemo(() => {
-    // Calculamos tudo em uma única passagem pelo array para melhor performance.
     return data.reduce(
       (acc, item) => {
         const value = Number(item.value);
@@ -35,7 +33,6 @@ export default function BalanceTable({ type, data }: TableProps) {
   const title = type === 'INCOME' ? 'Receitas' : 'Despesas';
 
   return (
-    // Usamos <article> para um componente semanticamente mais correto.
     <article className={`${styles.summaryCard} ${type === 'INCOME' ? styles.green : styles.red}`}>
       <header className={styles.cardHeader}>
         <h2 className={styles.title}>{title}</h2>
@@ -45,7 +42,6 @@ export default function BalanceTable({ type, data }: TableProps) {
       </header>
 
       <div className={styles.cardBody}>
-        {/* O valor total agora é o "herói" do card, com grande destaque. */}
         <div className={styles.cardTotal}>
           <span>Total</span>
           <span>{convertToMoneyFormat(totals.total)}</span>

@@ -1,16 +1,27 @@
 .container {
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-5) var(--space-3);
   margin: var(--space-3);
   min-height: var(--space-32);
   position: relative;
   border-radius: var(--radius-lg);
   background-color: white;
-  display: flex; /* Usar flexbox facilita o alinhamento do conteúdo */
+  display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adicionar uma sombra sutil */
+  
+  /* border: solid 1px #aaadab; */
+  box-shadow: 0 0.2rem 0.2rem rgba(131, 131, 131, 0.445);
 }
 
-/* Centraliza o spinner */
+.title {
+  padding: var(--space-4);
+  font-size: var(--font-size-2xl);
+
+  color: var(--gray-800);
+  font-weight: bold;
+
+  text-align: center;
+}
+
 .spinnerContainer {
   display: flex;
   flex-grow: 1; /* Permite que o spinner ocupe o espaço restante */
@@ -26,28 +37,22 @@
   flex-grow: 1;
 }
 
-.title {
-  margin-bottom: var(--space-6);
-  text-align: center;
-  font-weight: bold;
-}
-
 /* Definição de cores unificada */
 .neutral {
-  border: solid 1px var(--gray-900);
+  border: solid 1px #b3b3b3b0;
   --theme-color: var(--gray-900);
   color: var(--theme-color);
 }
 
 .green {
-  border: solid 1px var(--color-primary);
+  border: solid 1px #16a34a69;
   --theme-color: var(--color-primary);
   color: var(--theme-color);
 }
 
 .red {
-  border: solid 1px var(--color-secondary);
   --theme-color: var(--color-secondary);
+  border: solid 1px #dc262650;
   color: var(--theme-color);
 }
 
