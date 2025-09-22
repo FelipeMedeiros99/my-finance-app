@@ -18,7 +18,7 @@ export function convertToStringNumber(value: string) {
 
 
 export function convertToMoneyFormat(value: string | number) {
-  let newValue = String(value)
+  let newValue = String(Number(value).toFixed(2))
   newValue = convertToStringNumber(newValue)
 
   newValue = (Number(value) >= 0 ? Number(newValue) : -Number(newValue)).toLocaleString("pt-BT", { style: "currency", currency: "BRL" })
