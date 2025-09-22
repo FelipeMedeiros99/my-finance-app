@@ -8,6 +8,8 @@ import WhiteContainer from "@/components/white-container/WhiteContainer";
 import Input from "@/components/input/Input";
 import Checkbox from "@/components/checkbox/Checkbox";
 import Select from "@/components/select/Select";
+import InputDate from "@/components/input/InputDate";
+
 import { convertToNumberFormat, convertToStringNumber, filterNumbers } from "@/utils/numberFunctions";
 import config from "@/config";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -40,6 +42,8 @@ export default function TransactionForm({ type }: Props) {
   const installments = watch("installments")
   const recurrent = watch("recurrent");
   const wasConfirm = watch("wasConfirm")
+  const date = watch("dueDate")
+
 
   const formatData = (data: Form) => {
 
@@ -60,19 +64,15 @@ export default function TransactionForm({ type }: Props) {
     setIsFormDisabled(true)
     try {
       data = formatData(data);
-      console.log("sending data :", data)
- 
+
       let response;
       if (id) {
         response = await config.updateTransaction(data, Number(id));
       } else {
         response = await config.createTransaction(data);
       }
-      console.log("response: ", response)
       if (response.status === 201 || response.status === 200) {
-        route.push(`/${type.toLowerCase()}s`)
-        // alert("Transação criada com sucesso!")
-        // reset()
+        // route.push(`/${type.toLowerCase()}s`)
       }
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -103,8 +103,7 @@ export default function TransactionForm({ type }: Props) {
       if (id && Number(id)) {
         try {
           const response = await config.getTransaction(`id=${id}`)
-          const data = response.data[0]
-          console.log("data response: ", data)
+          const data = response.data[0] 
 
           setValue("description", data.description)
           setValue("value", data.value)
@@ -142,12 +141,18 @@ export default function TransactionForm({ type }: Props) {
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputs}>
           <Input disabled={isFormDisabled} error={errors.description?.message} {...register("description", rules.description)} label="Descrição: " placeholder={type === "EXPENSE" ? "Ex: Aluguel" : type === "INCOME" ? "Ex: Salário" : "Ex: Transferência"} />
-          <Input disabled={isFormDisabled} error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00" />
-          <Input disabled={isFormDisabled} error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
           {!id && <Select disabled={isFormDisabled} error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado"]} />}
           {recurrent === "Parcelado" && <Input disabled={isFormDisabled} error={errors.installments?.message} {...register("installments", rules.installments)} label="Numero de parcelas" type="number" />}
-          <Select disabled={isFormDisabled} error={errors.category?.message} {...register("category", rules.category)} label="Categoria: " options={categories.map((category) => (category.name))} />
-          <Select disabled={isFormDisabled} error={errors.account?.message} {...register("account", rules.account)} label="Conta: " options={accounts.map((account) => (account.name))} />
+
+          <Input disabled={isFormDisabled} error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00" />
+          <InputDate date={date} disabled={isFormDisabled} error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
+          {/* <div className={styles.categoryAndAccountContainer}>
+          </div> */}
+
+          <div className={styles.categoryAndAccountContainer}>
+            <Select disabled={isFormDisabled} error={errors.category?.message} {...register("category", rules.category)} label="Categoria: " options={categories.map((category) => (category.name))} />
+            <Select disabled={isFormDisabled} error={errors.account?.message} {...register("account", rules.account)} label="Conta: " options={accounts.map((account) => (account.name))} />
+          </div>
           <Checkbox disabled={isFormDisabled} label={wasConfirm ? "Confirmado" : "Não confirmado"} {...register("wasConfirm")} />
         </div>
 
