@@ -8,7 +8,7 @@ import WhiteContainer from "@/components/white-container/WhiteContainer"
 import config from "@/config"
 import Checkbox from "@/components/checkbox/Checkbox"
 import { formatToDate } from "@/utils/dateFunctions"
-import { convertToMoneyFormat, convertToNumberFormat } from "@/utils/numberFunctions"
+import { calculateConfirmedAndTotalsAtIncomesAndExpenses, calculateFullTotalsFromAllAccountsTransactions, convertToMoneyFormat, convertToNumberFormat } from "@/utils/numberFunctions"
 
 import { Transaction, ValuesInformation } from "./types"
 import styles from "./style.module.css"
@@ -94,24 +94,23 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [valuesInformations, setValuesInformations] = useState<ValuesInformation>()
 
-
+  console.log(valuesInformations)
 
   const calculateValues = () => {
-    const total = transactions.reduce((acumulator, transaction) => acumulator + Number(transaction.value), 0)
-    const confirmedTotal = transactions.reduce((acumulator, transaction) => {
-      if (transaction.wasConfirm) {
-        return acumulator + Number(transaction.value)
-      }
-      return acumulator
-    }, 0)
-    const unconfirmedTotal = total - confirmedTotal
-
-    setValuesInformations({
-      confirmedTotal: convertToMoneyFormat(confirmedTotal),
-      total: convertToMoneyFormat(total),
-      unconfirmedTotal: convertToMoneyFormat(unconfirmedTotal)
-    })
-  }
+    const calculedValues = calculateConfirmedAndTotalsAtIncomesAndExpenses(transactions)
+    if(type === "EXPENSE"){
+      setValuesInformations({
+        confirmedTotal: convertToMoneyFormat(calculedValues.expense.confirmed),
+        total: convertToMoneyFormat(calculedValues.expense.total),
+        unconfirmedTotal: convertToMoneyFormat(calculedValues.expense.total - calculedValues.expense.confirmed)
+      })
+    }else{ 
+      setValuesInformations({
+        confirmedTotal: convertToMoneyFormat(calculedValues.income.confirmed),
+        total: convertToMoneyFormat(calculedValues.income.total),
+        unconfirmedTotal: convertToMoneyFormat(calculedValues.income.total - calculedValues.expense.confirmed)
+      })
+    }}
 
   const getTransactions = async () => {
     setIsLoading(true)
