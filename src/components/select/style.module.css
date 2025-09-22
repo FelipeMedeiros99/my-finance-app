@@ -9,11 +9,14 @@
 
 .select{
   height: var(--space-8);
+  width: 100%;
+  
   background-color: white;
-  /* border: none; */
-  /* box-shadow: var(--shadow-line); */
-  border: solid 1px black;
+  
+  box-shadow: 0 0.2rem 0.2rem #adb5bd47;
+  border: solid 1px #b6b6b6f0;
   border-radius: var(--radius-md);
+
   padding: var(--space-2);
 }
 

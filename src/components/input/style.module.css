@@ -10,9 +10,13 @@
 .input{
   height: var(--space-8);
   width: 100%;
+  
   background-color: white;
-  border: solid 1px black;
+  
+  box-shadow: 0 0.2rem 0.2rem #adb5bd47;
+  border: solid 1px #b6b6b6f0;
   border-radius: var(--radius-md);
+
   padding: var(--space-2);
 }
 
@@ -27,7 +31,47 @@
 }
 
 .input[type="checkbox"]{
+  box-shadow: none;
   box-sizing: content-box;
   width: var(--space-5);
 }
 
+.dateContainer{
+  position: relative;
+  height: var(--space-8);
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.dateContainer > *{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  /* display: flex; */
+}
+
+.dateText{
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--radius-md);
+  border: var(--border-settings);
+  background-color: none;
+  
+  padding-left: var(--space-2);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.dateInput{
+  color: rgba(0, 0, 0, 0);
+  accent-color: red;
+  background-color: rgba(255, 255, 255, 0);
+  pointer-events: none;
+}
