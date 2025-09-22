@@ -11,6 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Meu app de finanças",
+  manifest: "manifest.json",
   description: "App destinado a gerenciamento de finanças",
 };
 
