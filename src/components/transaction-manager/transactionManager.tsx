@@ -8,7 +8,7 @@ import WhiteContainer from "@/components/white-container/WhiteContainer"
 import config from "@/config"
 import Checkbox from "@/components/checkbox/Checkbox"
 import { formatToDate } from "@/utils/dateFunctions"
-import { calculateConfirmedAndTotalsAtIncomesAndExpenses, calculateFullTotalsFromAllAccountsTransactions, convertToMoneyFormat, convertToNumberFormat } from "@/utils/numberFunctions"
+import { calculateConfirmedAndTotalsAtIncomesAndExpenses, convertToMoneyFormat, convertToNumberFormat } from "@/utils/numberFunctions"
 
 import { Transaction, ValuesInformation } from "./types"
 import styles from "./style.module.css"
