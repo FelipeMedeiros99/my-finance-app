@@ -79,6 +79,8 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
     --shadow-line: 0 0 0.2rem rgba(0, 0, 0, 0.836);
+    --box-shadow: 0 0.2rem 0.2rem #adb5bd47;
+
   
     /* ===== Border  ===== */
     --radius-sm: 4px;
@@ -89,6 +91,7 @@
     --border-default: 1px solid var(--gray-900);
     --border-green: 1px solid var(--color-primary);
     --border-red: 1px solid var(--color-secondary);
+    --border-settings: 1px solid #adb5bd47;
 
 
 
