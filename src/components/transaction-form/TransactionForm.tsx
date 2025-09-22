@@ -72,7 +72,7 @@ export default function TransactionForm({ type }: Props) {
         response = await config.createTransaction(data);
       }
       if (response.status === 201 || response.status === 200) {
-        // route.push(`/${type.toLowerCase()}s`)
+        route.push(`/${type.toLowerCase()}s`)
       }
     } catch (e) {
       if (e instanceof AxiosError) {
