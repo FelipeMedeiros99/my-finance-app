@@ -1,6 +1,5 @@
 export const returnObjectOfDate = (date: string) => {
-
-  const dateRegex = /^\d{4}-\d{1,2}\d{1,2}$/
+  const dateRegex = /^\d{4}-\d{1,2}-\d{1,2}$/
   let onlyDate = date.split("T")[0]
 
   if (!dateRegex.test(onlyDate)) {
@@ -14,7 +13,7 @@ export const returnObjectOfDate = (date: string) => {
   }
 }
 
-export const formateDateToText = (date: string | Date) => {
+export const convertDateToText = (date: string | Date) => {
   const currentDate = new Date()
 
   let filtredDate = { year: currentDate.getFullYear(), month: currentDate.getMonth(), day: currentDate.getDate() }
@@ -25,7 +24,7 @@ export const formateDateToText = (date: string | Date) => {
     filtredDate.day = Number(day)
 
   }
-  const modelDate = typeof date === "string" ? convertToLocalTime(new Date(filtredDate.year, filtredDate.month, filtredDate.day)) : convertToLocalTime(new Date(date))
+  const modelDate = typeof date === "string" ? new Date(filtredDate.year, filtredDate.month, filtredDate.day) : new Date(date)
 
   return modelDate.toLocaleDateString("pt-BR", {
     year: "numeric",
@@ -47,9 +46,4 @@ export function convertInputDateToDate(date: string | Date) {
     throw new Error("formado de data deve ser: YYYY-MM-DD")
   }
 
-}
-
-
-export function convertToLocalTime(date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }

@@ -7,7 +7,7 @@ import TopDate from "@/components/top-date/TopDate"
 import WhiteContainer from "@/components/white-container/WhiteContainer"
 import config from "@/config"
 import Checkbox from "@/components/checkbox/Checkbox"
-import { formatToDate } from "@/utils/dateFunctions"
+import { returnObjectOfDate } from "@/utils/dateFunctions"
 import { calculateConfirmedAndTotalsAtIncomesAndExpenses, convertToMoneyFormat, convertToNumberFormat } from "@/utils/numberFunctions"
 
 import { Transaction, ValuesInformation } from "./types"
@@ -16,7 +16,7 @@ import Link from "next/link"
 
 
 const DescriptionTransactionBox = ({ transaction, toggleConfirmation }: { transaction: Transaction, toggleConfirmation: (transaction: Transaction) => void }) => {
-  const formatedDate = formatToDate(new Date(transaction?.dueDate));
+  const formatedDate = returnObjectOfDate(String(transaction?.dueDate));
   return (
     <div className={`${styles.descriptionTransactionBox}`}>
 
@@ -93,8 +93,6 @@ export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME
   const [isLoading, setIsLoading] = useState(true)
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [valuesInformations, setValuesInformations] = useState<ValuesInformation>()
-
-  console.log(valuesInformations)
 
   const calculateValues = () => {
     const calculedValues = calculateConfirmedAndTotalsAtIncomesAndExpenses(transactions)

@@ -18,6 +18,7 @@ import { defaultValues, rules } from "./const";
 import { Accounts, Categories, Form, Props } from "./types";
 
 import styles from "./style.module.css";
+import { convertInputDateToDate } from "@/utils/dateFunctions";
 
 
 export default function TransactionForm({ type }: Props) {
@@ -55,7 +56,8 @@ export default function TransactionForm({ type }: Props) {
 
     data.installments = Number(data.installments)
     data.value = convertToNumberFormat(data.value)
-    data.dueDate = new Date(data.dueDate)
+    data.dueDate = convertInputDateToDate(data.dueDate)
+
 
     return data
   }
@@ -64,6 +66,7 @@ export default function TransactionForm({ type }: Props) {
     setIsFormDisabled(true)
     try {
       data = formatData(data);
+      console.log(data)
 
       let response;
       if (id) {
@@ -107,7 +110,7 @@ export default function TransactionForm({ type }: Props) {
 
           setValue("description", data.description)
           setValue("value", data.value)
-          setValue("dueDate", new Date(data.dueDate).toISOString().split("T")[0])
+          setValue("dueDate", (new Date(data.dueDate)).toISOString().split("T")[0])
           setValue("recurrent", data.recurrent)
           setValue("installments", 1)
           setValue("category", data.category.name)
@@ -119,6 +122,8 @@ export default function TransactionForm({ type }: Props) {
       }
     })()
   }, [id, setValue])
+
+  // console.log({date})
 
   useEffect(() => {
     (async () => {

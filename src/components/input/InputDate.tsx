@@ -3,7 +3,7 @@
 import { InputHTMLAttributes, useId, useRef } from "react"
 
 import styles from "./style.module.css"
-import { formateDateToText } from "@/utils/dateFunctions"
+import { convertDateToText } from "@/utils/dateFunctions"
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -26,7 +26,7 @@ export default function InputDate({label, date, error, ref, ...props}: PropsInpu
   <div className={`${styles.inputContainer}`}>
     <label htmlFor={id}>{label}</label>
     <div className={styles.dateContainer} onClick={handleClick} ref={containerInput}>
-      <button type="button" className={styles.dateText}>{formateDateToText(date)}</button>
+      <button type="button" className={styles.dateText}>{convertDateToText(String(date))}</button>
       <input 
       tabIndex={-1}
       ref={(e)=>{
