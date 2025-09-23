@@ -1,6 +1,6 @@
 export const returnObjectOfDate = (date: string) => {
   const dateRegex = /^\d{4}-\d{1,2}-\d{1,2}$/
-  let onlyDate = date.split("T")[0]
+  const onlyDate = date.split("T")[0]
 
   if (!dateRegex.test(onlyDate)) {
     throw new Error("Data inválida, o formato deve ser YYYY-MM-DD")
@@ -16,9 +16,9 @@ export const returnObjectOfDate = (date: string) => {
 export const convertDateToText = (date: string | Date) => {
   const currentDate = new Date()
 
-  let filtredDate = { year: currentDate.getFullYear(), month: currentDate.getMonth(), day: currentDate.getDate() }
+  const filtredDate = { year: currentDate.getFullYear(), month: currentDate.getMonth(), day: currentDate.getDate() }
   if (typeof date === "string") {
-    let [year, month, day] = date.split("-")
+    const [year, month, day] = date.split("-")
     filtredDate.year = Number(year)
     filtredDate.month = Number(month) - 1
     filtredDate.day = Number(day)
@@ -34,7 +34,7 @@ export const convertDateToText = (date: string | Date) => {
 }
 
 export function convertInputDateToDate(date: string | Date) {
-  let datePart = String(date).split("T")[0]
+  const datePart = String(date).split("T")[0]
   const timeRegex = /^\d{4}-\d{1,2}-\d{1,2}$/
   const validation = timeRegex.test(datePart)
   if (validation) {
