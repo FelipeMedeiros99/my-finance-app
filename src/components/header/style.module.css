@@ -7,7 +7,7 @@
   width: 100%;
   height: auto; /* Allow height to adjust */
   padding: var(--space-4) var(--space-6); /* Use padding instead of a fixed height */
-  background-color: var(--color-analogous-2);
+  background-color: var(--color-primary);
   z-index: 10;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@
 
 .icon {
   font-size: var(--font-size-2xl); /* Make icon a little smaller for a clean look */
-  color: var(--btn-alert-text);
+  color: var(--gray-100);
   cursor: pointer;
 }
 
@@ -25,13 +25,25 @@
   position: absolute;
   top: 100%; 
   right: 0;
-  width: 250px; 
-  max-height: 80vh; 
+  width: 16rem; 
   background-color: white;
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
   overflow: hidden; 
   z-index: 10;
+
+  opacity: 1;
+  transform: translateY(0);
+
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hiddem{
+  opacity: 0;
+  transform: translateY(-100%);
+
+  pointer-events: none;
+
 }
 
 .ul {
@@ -60,6 +72,8 @@
   font-weight: bold;
   color: white;
 }
+
+
 
 /* .header{
   position: fixed;

@@ -28,13 +28,11 @@ export default function Header() {
     }
   }, [isLinksVisible])
 
-
   return (
     <header className={styles.header}>
       <AiOutlineMenu className={styles.icon} onClick={() => setIsLinksVisible(!isLinksVisible)} />
 
-      {isLinksVisible &&
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${!isLinksVisible ? styles.hiddem : ""}`}>
           <ul ref={ulRef} className={styles.ul}>
             {routesSettings.map((routerSetting) => (
               <Link 
@@ -46,7 +44,6 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-      }
     </header>
   )
 }
