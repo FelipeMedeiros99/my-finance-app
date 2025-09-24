@@ -26,6 +26,15 @@ type CategoryModel = {
   type: string;
 }
 
+const ButtonCategory = ({isActived, children, ...props}: React.ComponentProps<"button"> & {isActived: boolean}) => {
+
+  return(
+    <button className={`${styles.toggleButton} ${isActived ? styles.active : ''}`} {...props}>{children}</button>
+  )
+}
+
+
+
 
 export default function Category() {
   const [categories, setCategories] = useState([])
@@ -52,7 +61,7 @@ export default function Category() {
         cancelModalFunction()
       }
     } catch (e) {
-      console.log(e)  
+      console.log(e)
     }
   }
 
@@ -108,13 +117,16 @@ export default function Category() {
   return (
     <React.Fragment>
 
-      <div className={styles.containerButtons}>
-        <button onClick={() => { setPageType("EXPENSE") }} className="btn danger">Despesas</button>
-        <button onClick={() => { setPageType("INCOME") }} className="btn success">Receitas</button>
-      </div>
 
       <WhiteContainer title="Categorias" theme={pageType === "EXPENSE" ? "red" : pageType === "INCOME" ? "green" : "neutral"}>
+
+        <div className={`${styles.toggleGroup} ${pageType === "EXPENSE" ? styles.red : pageType === "INCOME" ? styles.green : ""}`}>
+          <ButtonCategory isActived={pageType === "INCOME"} onClick={() => setPageType("INCOME")}>Receitas</ButtonCategory>
+          <ButtonCategory isActived={pageType === "EXPENSE"} onClick={() => setPageType("EXPENSE")}>Despesas</ButtonCategory>
+        </div>
+
         <FaPlusCircle className={styles.icon} onClick={() => openModal()} />
+        
         <div className={styles.categoryContainer}>
           {categories &&
             categories.map((category: CategoryModel) => {
