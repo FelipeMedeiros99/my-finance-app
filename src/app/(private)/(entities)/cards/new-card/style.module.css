@@ -1,0 +1,7 @@
+.buttonBox{
+  padding-top: var(--space-8);
+}
+
+.button{
+  width: 100%;
+}

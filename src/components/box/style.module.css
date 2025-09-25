@@ -1,0 +1,20 @@
+.vbox, .hbox{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.vbox{
+  flex-direction: column;
+  align-items: center;
+
+
+  gap: var(--space-3);
+}
+
+.hbox{
+  justify-content: center;
+  align-items: baseline;
+
+  gap: var(--space-3);
+}
