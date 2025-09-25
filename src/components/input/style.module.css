@@ -36,6 +36,8 @@
   width: var(--space-5);
 }
 
+/* ========= Date Input ============ */
+
 .dateContainer{
   position: relative;
   height: var(--space-8);
@@ -56,22 +58,24 @@
 }
 
 .dateText{
-  background-color: white;
-  box-shadow: var(--box-shadow);
-  border-radius: var(--radius-md);
-  border: var(--border-settings);
-  background-color: none;
+  display: flex;
+  align-items: center;
   
   padding-left: var(--space-2);
   font-size: var(--font-size-sm);
-  display: flex;
-  align-items: center;
+
+  background-color: transparent;
+
+  box-shadow: var(--box-shadow);
+  border-radius: var(--radius-md);
+  background-color: none;
+  
   z-index: 2;
 }
 
 .dateInput{
   color: rgba(0, 0, 0, 0);
   accent-color: red;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: transparent;
   pointer-events: none;
 }
