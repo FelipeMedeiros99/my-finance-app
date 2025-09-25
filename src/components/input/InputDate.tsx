@@ -7,39 +7,44 @@ import { convertDateToText } from "@/utils/dateFunctions"
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  name?: string;  
+  name?: string;
   date: string | Date;
-  error?: string | undefined; 
+  error?: string | undefined;
   ref?: React.ForwardedRef<HTMLInputElement>;
 }
 
-export default function InputDate({label, date, error, ref, ...props}: PropsInput){
+export default function InputDate({ label, date, error, ref, ...props }: PropsInput) {
   const inputRef = useRef<HTMLInputElement>(null)
   const containerInput = useRef<HTMLInputElement>(null)
-  const handleClick = ()=>{
+  const handleClick = () => {
     inputRef.current?.showPicker()
-  } 
+  }
 
+  const refFunction = (e: HTMLInputElement | null) => {
+    inputRef.current = e;
+    if (typeof ref === 'function') {
+      ref(e);
+    } else if (ref) {
+      ref.current = e;
+    }
+  }
 
   const id = useId();
   return (
-  <div className={`${styles.inputContainer}`}>
-    <label htmlFor={id}>{label}</label>
-    <div className={styles.dateContainer} onClick={handleClick} ref={containerInput}>
-      <button type="button" className={styles.dateText}>{convertDateToText(String(date))}</button>
-      <input 
-      tabIndex={-1}
-      ref={(e)=>{
-        inputRef.current = e;
-        if (typeof ref === 'function') {
-          ref(e);
-        } else if (ref) {
-          ref.current = e;
-        }
-      }}
-        className={`${styles.input} ${styles.dateInput}`} id={id} {...props} type="date" />
+    <div className={`${styles.inputContainer}`}>
+      <label htmlFor={id}>{label}</label>
+      <div className={styles.dateContainer} onClick={handleClick} ref={containerInput}>
+        <button type="button" className={styles.dateText}>{date ? convertDateToText(date) : "Selecione uma data"}</button>
+        <input
+          tabIndex={-1}
+          className={`${styles.input} ${styles.dateInput}`} 
+          id={id} 
+          type="date" 
+          ref={refFunction}
+          {...props} 
+          />
+      </div>
+      {error && <p className={styles.errorAlert}>{error}</p>}
     </div>
-    {error && <p className={styles.errorAlert}>{error}</p>}
-  </div>
   )
 }
