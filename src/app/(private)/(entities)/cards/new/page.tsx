@@ -1,7 +1,9 @@
+import WhiteContainer from "@/components/white-container/WhiteContainer";
+
 export default function New(){
   return(
-    <div>
-      new 
-    </div>
+    <WhiteContainer title="Nova despesa">
+
+    </WhiteContainer>
   )
 }
