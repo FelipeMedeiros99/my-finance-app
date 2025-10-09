@@ -6,7 +6,7 @@ import styles from "./style.module.css";
 
 type Props = {
   children?: React.ReactNode;
-  title: string;
+  title?: string;
   theme?: "green" | "red" | "neutral",
   isLoading?: boolean;
 }
