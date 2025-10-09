@@ -1,3 +1,5 @@
+import { CardForm } from "@/app/(private)/(entities)/cards/new-card/page";
+import { CardExpenseSendForm } from "@/app/(private)/(entities)/cards/new-expense/page";
 import { Form as TransactionForm } from "@/components/transaction-form/types"; 
 import { Transaction } from "@/components/transaction-manager/types";
 import axios, { AxiosError, AxiosResponse } from "axios";
@@ -42,8 +44,8 @@ class AxiosConfig {
   }
 
   // ========== Category ==============
-  async getCategories(){
-    return await this.instance.get("/category");
+  async getCategories(type?: "INCOME" | "EXPENSE"){
+    return await this.instance.get(type ? `/category?type=${type}` : "/category");
   }
 
 async getCategoryNames(type: "INCOME" | "EXPENSE"){
@@ -94,6 +96,22 @@ async getCategoryNames(type: "INCOME" | "EXPENSE"){
 
   async updateTransaction(data: Omit<Transaction, "userId"|"id"|"category"|"account">, transactionId: number){
     return await this.instance.put(`/transaction/${transactionId}`, data)
+  }
+
+
+  // ================== Cards ============================
+  async createCard(data: CardForm){
+    return await this.instance.post("/card", data)
+  }
+
+  async getCards(date?: Date){
+    return await this.instance.get(date ? `/card?date=${date}` : "/card");
+  }
+
+
+  // ================== Card expense ============================
+  async createCardExpense(data: CardExpenseSendForm){
+    return await this.instance.post("/card-expense", data)
   }
 }
 
