@@ -110,7 +110,7 @@ export default function TransactionForm({ type }: Props) {
 
           setValue("description", data.description)
           setValue("value", data.value)
-          setValue("dueDate", (new Date(data.dueDate)).toISOString().split("T")[0])
+          setValue("dueDate", new Date(data.dueDate))
           setValue("recurrent", data.recurrent)
           setValue("installments", 1)
           setValue("category", data.category.name)
@@ -151,8 +151,6 @@ export default function TransactionForm({ type }: Props) {
 
           <Input disabled={isFormDisabled} error={errors.value?.message} {...register("value", rules.value)} label="Valor: " placeholder="Ex: 200,00" />
           <InputDate date={date} disabled={isFormDisabled} error={errors.dueDate?.message} {...register("dueDate", rules.dueDate)} label="Vencimento: " type="date" />
-          {/* <div className={styles.categoryAndAccountContainer}>
-          </div> */}
 
           <div className={styles.categoryAndAccountContainer}>
             <Select disabled={isFormDisabled} error={errors.category?.message} {...register("category", rules.category)} label="Categoria: " options={categories.map((category) => (category.name))} />
