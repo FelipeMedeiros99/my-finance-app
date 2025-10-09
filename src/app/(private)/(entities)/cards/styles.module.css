@@ -1,0 +1,24 @@
+.addIcon {
+  font-size: var(--font-size-2xl);
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  color: var(--color-primary);
+  cursor: pointer;
+  z-index: 1;
+}
+
+
+/* =========== Card =============== */
+
+.containerCard{
+  align-items: flex-start;
+  box-shadow: var(--box-shadow);
+  border: var(--border-settings);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+}
+
+.cardRow{
+  justify-content: space-between;
+}
