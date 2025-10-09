@@ -24,7 +24,7 @@ export const convertDateToText = (date: string | Date) => {
     filtredDate.day = Number(day)
 
   }
-  const modelDate = typeof date === "string" ? new Date(filtredDate.year, filtredDate.month, filtredDate.day) : new Date(date)
+  const modelDate = typeof date === "string" ? new Date(filtredDate.year, filtredDate.month, filtredDate.day) : date
 
   return modelDate.toLocaleDateString("pt-BR", {
     year: "numeric",
