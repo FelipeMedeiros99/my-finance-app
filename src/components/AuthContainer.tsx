@@ -1,11 +1,6 @@
 import { FormHTMLAttributes } from "react";
 
-type AuthContainerProps = FormHTMLAttributes<HTMLFormElement> & {
-  children: React.ReactNode;
-
-}
-
-export default function AuthContainer({ children, ...props }: AuthContainerProps) {
+export default function AuthContainer({ children, ...props }: FormHTMLAttributes<HTMLFormElement>) {
   return (
     <form className="
       container
