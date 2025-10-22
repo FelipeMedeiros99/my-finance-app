@@ -76,7 +76,11 @@ export default function Login() {
         {...register("password", passwordRules)}
       />
       <ButtonForm>Login</ButtonForm>
-      <Link href={"/register"}>Não possui conta? Cadastre-se.</Link>
+      <p>
+        Não possui conta?{" "}
+        <Link href={"/register"} className="text-lime-600 underline">Cadastre-se.</Link>
+      </p>
+        
 
     </AuthContainer>
   )
