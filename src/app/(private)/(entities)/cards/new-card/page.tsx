@@ -3,11 +3,11 @@
 import { useEffect, useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import Input from "@/components/input/Input";
+import Input from "@/components/Input";
 import WhiteContainer from "@/components/WhiteContainer";
 import VBox from "@/components/box/VBox";
 import HBox from "@/components/box/HBox";
-import Select from "@/components/select/Select";
+import Select from "@/components/Select";
 
 
 import styles from "./style.module.css"

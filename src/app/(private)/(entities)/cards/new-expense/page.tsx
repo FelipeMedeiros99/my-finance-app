@@ -3,9 +3,9 @@
 import WhiteContainer from "@/components/WhiteContainer";
 import VBox from "@/components/box/VBox";
 import HBox from "@/components/box/HBox";
-import Input from "@/components/input/Input";
-import InputDate from "@/components/input/InputDate";
-import Select from "@/components/select/Select";
+import Input from "@/components/Input";
+import InputDate from "@/components/InputDate";
+import Select from "@/components/Select";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { rules } from "./const";
 import { useEffect, useState } from "react";

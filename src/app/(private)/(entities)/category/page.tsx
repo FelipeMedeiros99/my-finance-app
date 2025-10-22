@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import config from "@/config"
 
 import WhiteContainer from "@/components/WhiteContainer"
-import Input from "@/components/input/Input";
+import Input from "@/components/Input";
 import Modal from "@/components/modal/Modal";
 
 import styles from "./style.module.css"

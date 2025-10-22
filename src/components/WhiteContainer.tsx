@@ -13,8 +13,8 @@ type Props = {
 
 const themeClasses = {
   neutral: "border-gray-500 text-gray-900",
-  green: "border-green-600 text-green-600",
-  red: "border-red-600 text-red-600",
+  green: "border-green-600",
+  red: "border-red-600",
 };
 
 const spinnerColorMap = {

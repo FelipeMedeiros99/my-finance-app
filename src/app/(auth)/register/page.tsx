@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 import { passwordRules, usernameRules } from "./const"
-import Input from "@/components/input/Input"
+import Input from "@/components/Input"
 
 import config from "@/config"
 import { AxiosError } from "axios"
 import AuthContainer from "@/components/AuthContainer"
 import ButtonForm from "@/components/ButtonForm"
-import PasswordInput from "@/components/input/PasswordInput"
+import PasswordInput from "@/components/PasswordInput"
 
 type Form = {
   username: string

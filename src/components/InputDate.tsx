@@ -4,6 +4,7 @@ import { InputHTMLAttributes, useId, useRef } from "react"
 
 import styles from "./style.module.css"
 import { convertDateToText } from "@/utils/dateFunctions"
+import { inputStyle } from "./Input"
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -30,21 +31,44 @@ export default function InputDate({ label, date, error, ref, ...props }: PropsIn
   }
 
   const id = useId();
+  
   return (
-    <div className={`${styles.inputContainer}`}>
-      <label htmlFor={id}>{label}</label>
-      <div className={styles.dateContainer} onClick={handleClick} ref={containerInput}>
-        <button type="button" className={styles.dateText}>{date ? convertDateToText(date) : "Selecione uma data"}</button>
+    <div className="w-full flex flex-col gap-1">
+      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+        {label}
+      </label>
+      <div 
+        className="relative h-10 w-full flex items-center justify-center" 
+        onClick={handleClick}
+      >
+        <button 
+          type="button" 
+          className={`w-full flex items-start ${inputStyle}`}
+        >
+          {date ? convertDateToText(date) : "Selecione uma data"}
+        </button>
+
         <input
           tabIndex={-1}
-          className={`${styles.input} ${styles.dateInput}`} 
+          className={`
+            absolute inset-0 
+            opacity-0 
+            w-full 
+            h-full 
+            cursor-pointer 
+            z-20
+          `} 
           id={id} 
           type="date" 
           ref={refFunction}
           {...props} 
-          />
+        />
       </div>
-      {error && <p className={styles.errorAlert}>{error}</p>}
+      {error && (
+        <p className="mt-1 text-xs text-red-600">
+          {error}
+        </p>
+      )}
     </div>
   )
 }

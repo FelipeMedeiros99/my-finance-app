@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
-import Input from "../input/Input";
+import Input from "../Input";
 
 import styles from "./style.module.css"
 
