@@ -2,7 +2,6 @@
 
 import { InputHTMLAttributes, useId, useRef } from "react"
 
-import styles from "./style.module.css"
 import { convertDateToText } from "@/utils/dateFunctions"
 import { inputStyle } from "./Input"
 

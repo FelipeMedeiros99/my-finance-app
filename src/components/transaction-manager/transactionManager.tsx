@@ -5,12 +5,10 @@ import { AxiosError } from "axios"
 import TopDate from "@/components/top-date/TopDate"
 import WhiteContainer from "@/components/WhiteContainer"
 import config from "@/config"
-import Checkbox from "@/components/checkbox/Checkbox"
 import { returnObjectOfDate } from "@/utils/dateFunctions"
 import { calculateConfirmedAndTotalsAtIncomesAndExpenses, convertToMoneyFormat, convertToNumberFormat } from "@/utils/numberFunctions"
 
 import { Transaction, ValuesInformation } from "./types"
-import styles from "./style.module.css"
 import Link from "next/link"
 
 
