@@ -7,9 +7,11 @@ import Link from "next/link"
 import { passwordRules, usernameRules } from "./const"
 import Input from "@/components/input/Input"
 
-import styles from "../style.module.css"
 import config from "@/config"
 import { AxiosError } from "axios"
+import AuthContainer from "@/components/AuthContainer"
+import ButtonForm from "@/components/ButtonForm"
+import PasswordInput from "@/components/input/PasswordInput"
 
 type Form = {
   username: string
@@ -50,7 +52,8 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+    <AuthContainer onSubmit={handleSubmit(onSubmit)}>
+
       <h1>Cadastro</h1>
 
       <Input
@@ -60,23 +63,26 @@ export default function Register() {
         {...register("username", usernameRules)}
       />
 
-      <Input
+      <PasswordInput
         label="Senha: "
         placeholder="123456"
         error={errors?.password?.message}
         {...register("password", passwordRules)}
       />
 
-      <Input
+      <PasswordInput
         label="Confirmar senha: "
         placeholder="123456"
         error={errors?.password?.message}
         {...register("confirmPassword", passwordRules)}
       />
+      <ButtonForm>Cadastrar</ButtonForm>
 
-      <button type="submit" className="btn success">Cadastrar</button>
-      <Link href={"/login"}>Já possui conta? Faça login.</Link>
+      <p>
+        Não possui conta?{" "}
+        <Link href={"/login"} className="text-lime-600 underline">Faça login.</Link>
+      </p>
 
-    </form>
+    </AuthContainer>
   )
 }
