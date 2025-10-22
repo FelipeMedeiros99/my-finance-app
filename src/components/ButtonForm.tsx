@@ -9,6 +9,7 @@ export default function ButtonForm({children, ...props}: FormHTMLAttributes<HTML
       rounded-xl 
       py-2
       shadow-md
+      focus:outline-none focus:ring focus:ring-lime-900
       " 
       {...props}>
       {children}
