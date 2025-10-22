@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation"
 import Input from "@/components/input/Input"
 import { passwordRules, usernameRules } from "./const"
 
-import styles from "../style.module.css"
 import config from "@/config"
 import { AxiosError } from "axios"
 import AuthContainer from "@/components/AuthContainer"
@@ -76,7 +75,6 @@ export default function Login() {
         {...register("password", passwordRules)}
       />
       <ButtonForm>Login</ButtonForm>
-      {/* <button type="submit" className="btn success">Login</button> */}
       <Link href={"/register"}>Não possui conta? Cadastre-se.</Link>
 
     </AuthContainer>
