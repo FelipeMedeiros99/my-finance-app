@@ -12,7 +12,7 @@ export default function RootLayout({
   return (
     <Guard>
       <Header />
-      <main className={styles.main}>
+      <main className="mx-0 mt-16 mb-24">
         {children}
       </main>
       <Footer />
