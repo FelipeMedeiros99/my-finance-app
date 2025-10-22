@@ -18,6 +18,7 @@ import { defaultValues, rules } from "./const";
 import { Accounts, Categories, Form, Props } from "./types";
 
 import { convertInputDateToDate } from "@/utils/dateFunctions";
+import ButtonForm from "../ButtonForm";
 
 
 export default function TransactionForm({ type }: Props) {
@@ -161,9 +162,9 @@ export default function TransactionForm({ type }: Props) {
           <Checkbox disabled={isFormDisabled} label={wasConfirm ? "Confirmado" : "Não confirmado"} {...register("wasConfirm")} />
         </div>
       
-        <button disabled={isFormDisabled} className={`btn ${type === "EXPENSE" ? "danger" : "success"} w-full py-3 text-lg font-semibold`} type="submit">
+        <ButtonForm disabled={isFormDisabled} className={`btn ${type === "EXPENSE" ? "danger" : "success"} w-full py-3 text-lg font-semibold`} type="submit">
           Salvar
-        </button>
+        </ButtonForm>
       
       </form>
     </WhiteContainer>
