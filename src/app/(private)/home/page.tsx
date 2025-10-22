@@ -9,7 +9,6 @@ import { Transaction } from "@/components/transaction-manager/types";
 import { calculateConfirmedBalance, calculateTotalBalance, calculateFullTotalsFromAllAccountsTransactions, convertToMoneyFormat } from "@/utils/numberFunctions";
 import BalanceTable from "@/components/balance-table/BalanceTable";
 
-import styles from "./style.module.css"
 import { Accounts } from "@/components/transaction-form/types";
 import Link from "next/link";
 import { MdOutlineOpenInNew } from "react-icons/md";
@@ -54,52 +53,72 @@ export default function Home() {
     }, 0)
     setBalance(total)
   }, [transactions])
-  // Código JSX do Home
+
+  const THEME_GREEN = "text-green-600";
+  const THEME_RED = "text-red-600";
+  const STYLES = {
+    green: THEME_GREEN,
+    red: THEME_RED,
+    balance: "font-bold text-xl",
+    label: "font-normal text-gray-600",
+    strongText: "font-bold",
+    weakText: "font-light opacity-80",
+    textRight: "text-right",
+  };
+
   return (
     <React.Fragment>
 
       <TopDate date={date} setDate={setDate} />
+      
+      <main className="pb-20">
 
-      <main className={styles.mainContent}>
-
-        {/* Seção de Resumos */}
+        {/* Resumos */}
         <WhiteContainer title="Resumos">
-          <div className={styles.summaryTables}>
+          
+          <div className="flex flex-col gap-4 mb-6">
             <BalanceTable type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
             <BalanceTable type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
           </div>
-          <div className={styles.balanceSummary}>
-            <p>
-              <span className={styles.label}>Balanço do mês: </span>
-              <span className={`${styles.balance} ${balance > 0 ? styles.green : balance < 0 ? styles.red : ""}`}>
+
+          <div className="pt-4 border-t border-gray-200 text-center">
+            
+            <p className="text-lg flex justify-between items-center">
+              <span className={STYLES.label}>Balanço do mês: </span>
+              <span
+                className={`${STYLES.balance} ${balance > 0 ? STYLES.green : balance < 0 ? STYLES.red : ""}`}
+              >
                 {convertToMoneyFormat(balance)}
               </span>
             </p>
           </div>
         </WhiteContainer>
-
-        {/* Seção de Contas */}
+        
+        {/* Contas */}
         <WhiteContainer title="Contas">
-          <Link href={`/accounts`} className={styles.viewAllButton}>
+          
+          <Link href={`/accounts`} className="absolute top-3 right-3 w-6 h-6 text-green-600 text-2xl cursor-pointer">
             <MdOutlineOpenInNew />
           </Link>
-          <div className={styles.accountsGrid}>
+
+          <div className="grid gap-4 mb-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {accounts?.map((account) => {
               const currentValue = account?.transaction ? calculateConfirmedBalance(account.transaction) : 0;
               const predictedValue = account?.transaction ? calculateTotalBalance(account.transaction) : 0;
               return (
-                <div key={account.name} className={styles.accountCard}>
-                  <h3 className={styles.accountName}>{account.name}</h3>
-                  <div className={styles.accountValues}>
-                    <p className={styles.accountValueItem}>
-                      <span className={styles.label}>Saldo atual: </span>
-                      <span className={currentValue > 0 ? styles.green : currentValue < 0 ? styles.red : ""}>
+                <div key={account.name} className="border border-gray-400 rounded-sm p-4 flex flex-col shadow-sm">
+                  <h3 className="pb-2 text-base font-bold">{account.name}</h3>                  
+                  <div className="flex flex-col gap-1">
+                    <p className="flex justify-between items-center text-sm">
+                      <span className={STYLES.label}>Saldo atual: </span>
+                      <span className={currentValue > 0 ? STYLES.green : currentValue < 0 ? STYLES.red : ""}>
                         {convertToMoneyFormat(currentValue)}
                       </span>
                     </p>
-                    <p className={styles.accountValueItem}>
-                      <span className={styles.label}>Saldo previsto: </span>
-                      <span className={predictedValue > 0 ? styles.green : predictedValue < 0 ? styles.red : ""}>
+
+                    <p className="flex justify-between items-center text-sm">
+                      <span className={STYLES.label}>Saldo previsto: </span>
+                      <span className={predictedValue > 0 ? STYLES.green : predictedValue < 0 ? STYLES.red : ""}>
                         {convertToMoneyFormat(predictedValue)}
                       </span>
                     </p>
@@ -109,70 +128,25 @@ export default function Home() {
             })}
           </div>
 
-          <div className={styles.accountTotals}>
-            <p className={styles.strongText}>
-              <span className={styles.label}>Total: </span>
-              <span className={accountsBalanceTotal.total > 0 ? styles.green : accountsBalanceTotal.total < 0 ? styles.red : ""}>
+          
+          <div className="pt-4 border-t border-gray-200 text-center">
+            
+            <p className="flex justify-between items-center">
+              <span className={STYLES.label}>Total: </span>
+              <span className={accountsBalanceTotal.total > 0 ? STYLES.green : accountsBalanceTotal.total < 0 ? STYLES.red : ""}>
                 {convertToMoneyFormat(accountsBalanceTotal.total)}
               </span>
             </p>
-            <p className={styles.weakText}>
-              <span className={styles.label}>Previsto: </span>
-              <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""}>
+            
+            <p className={`${STYLES.weakText} flex justify-between items-center`}>
+              <span className={STYLES.label}>Previsto: </span>
+              <span className={accountsBalanceTotal.predicted > 0 ? STYLES.green : accountsBalanceTotal.predicted < 0 ? STYLES.red : ""}>
                 {convertToMoneyFormat(accountsBalanceTotal.predicted)}
               </span>
             </p>
           </div>
-
         </WhiteContainer>
-
       </main>
     </React.Fragment>
-  )
+  );
 }
-
-
-
-// return (
-//     <>
-//       <TopDate date={date} setDate={setDate} />
-//       <WhiteContainer title="Resumos">
-//         <div className={styles.containerTables}>
-//           <BalanceTable type="INCOME" data={transactions.filter((transaction) => transaction.type === "INCOME")} />
-//           <BalanceTable type="EXPENSE" data={transactions.filter((transaction) => transaction.type === "EXPENSE")} />
-//         </div>
-
-//         <p className={styles.balanceContainer}>
-//           <label>Balanço do mês: </label> <span className={`${styles.balance} ${balance > 0 ? styles.green : balance < 0 ? styles.red : ""}`}>{convertToMoneyFormat(balance)}</span>
-//         </p>
-//       </WhiteContainer>
-
-
-//       <WhiteContainer title="Contas">
-//         <div className={styles.containerAccounts}>
-//           <Link href={`/accounts`} className={styles.iconButton}>
-//             <MdOutlineOpenInNew />
-//           </Link>
-//           {accounts?.map((account) => {
-//             const currentValue = account?.transaction ? calculateConfirmedBalance(account.transaction): 0;
-//             const predictedValue = account?.transaction ? calculateTotalBalance(account.transaction) : 0;
-//           return(
-
-//             <div key={account.name} className={styles.containerInfos}>
-//               <h3 className={styles.titleAccount}>{account.name}</h3>
-//               <p>Saldo atual: <span className={currentValue > 0 ? styles.green : currentValue < 0 ? styles.red : "" }>{convertToMoneyFormat(currentValue)}</span></p>
-//               <p>saldo previsto: <span className={predictedValue > 0 ? styles.green : predictedValue < 0 ? styles.red : "" }>{convertToMoneyFormat(predictedValue)}</span></p>
-//             </div>
-//             )
-// }
-//           )}
-//         </div>
-
-//         <div className={styles.balanceContainer}>
-//           <p><label htmlFor="currentBalance">Total: </label><span className={accountsBalanceTotal.total > 0 ? `${styles.green} ${styles.strongText}` : accountsBalanceTotal.total < 0 ? `${styles.red} ${styles.strongText}` : ""}  id="currentBalance">{convertToMoneyFormat(accountsBalanceTotal.total)}</span></p>
-//           <p className={styles.weakText}><label htmlFor="predicted">Previsto:</label> <span className={accountsBalanceTotal.predicted > 0 ? styles.green : accountsBalanceTotal.predicted < 0 ? styles.red : ""} id="predicted">{convertToMoneyFormat(accountsBalanceTotal.predicted)}</span></p>
-//         </div>
-
-//       </WhiteContainer>
-//     </>
-// )
