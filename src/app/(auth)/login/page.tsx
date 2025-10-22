@@ -10,6 +10,8 @@ import { passwordRules, usernameRules } from "./const"
 import styles from "../style.module.css"
 import config from "@/config"
 import { AxiosError } from "axios"
+import AuthContainer from "@/components/AuthContainer"
+import ButtonForm from "@/components/ButtonForm"
 
 type Form = {
   username: string
@@ -57,7 +59,7 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
+    <AuthContainer onSubmit={handleSubmit(onSubmit)}>
       <h1>Login</h1>
 
       <Input
@@ -73,10 +75,10 @@ export default function Login() {
         error={errors?.password?.message}
         {...register("password", passwordRules)}
       />
-
-      <button type="submit" className="btn success">Login</button>
+      <ButtonForm>Login</ButtonForm>
+      {/* <button type="submit" className="btn success">Login</button> */}
       <Link href={"/register"}>Não possui conta? Cadastre-se.</Link>
 
-    </form>
+    </AuthContainer>
   )
 }
