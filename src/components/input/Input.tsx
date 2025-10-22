@@ -8,27 +8,27 @@ type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   error?: string | undefined
 }
 
-export default function Input({label, error, ...props}: PropsInput){
+export default function Input({ label, error, ...props }: PropsInput) {
   const id = useId();
   return (
-  <div>
-    <label htmlFor={id}>{label}</label>
-    <input
-          className='
+    <div className="grid grid-cols-1">
+      <label htmlFor={id}>{label}</label>
+      <input
+        className='
             shadow-lg
             border border-gray-400
             px-2 py-1
             rounded-md
             focus:outline-none focus:ring-1 focus:ring-lime-600 
           '
-          {...props}
-          />
-    <p className='
+        {...props}
+      />
+      <p className='
           mt-1
           text-xs
           text-red-500
         '
-        >{error}</p>
-  </div>
+      >{error}</p>
+    </div>
   )
 }

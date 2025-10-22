@@ -19,7 +19,7 @@ export default function PasswordInput({ label, error, ...props }: PasswordInputP
   };
 
   return (
-    <div>
+    <div className='grid grid-cols-1'>
       <label htmlFor={id}>{label}</label>
       
       <div className='relative'>
@@ -42,6 +42,7 @@ export default function PasswordInput({ label, error, ...props }: PasswordInputP
             w-8
             flex items-center justify-center
             hover:cursor-pointer
+            focus:outline-none focus:ring focus:ring-lime-600
           '
         >
           {showPassword ? <FaEye /> : <FaEyeSlash/>}
