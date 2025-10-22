@@ -58,21 +58,18 @@ export default function Register() {
 
       <Input
         label="Usuário: "
-        placeholder="meu_usuario"
         error={errors?.username?.message}
         {...register("username", usernameRules)}
       />
 
       <PasswordInput
         label="Senha: "
-        placeholder="123456"
         error={errors?.password?.message}
         {...register("password", passwordRules)}
       />
 
       <PasswordInput
         label="Confirmar senha: "
-        placeholder="123456"
         error={errors?.password?.message}
         {...register("confirmPassword", passwordRules)}
       />

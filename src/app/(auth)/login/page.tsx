@@ -64,14 +64,12 @@ export default function Login() {
 
       <Input
         label="Usuário: "
-        placeholder="meu_usuario"
         error={errors?.username?.message}
         {...register("username", usernameRules)}
       />
 
       <PasswordInput
         label="Senha: "
-        placeholder="123456"
         error={errors?.password?.message}
         {...register("password", passwordRules)}
       />
