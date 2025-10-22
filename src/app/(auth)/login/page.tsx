@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import Input from "@/components/input/Input"
+import PasswordInput from "@/components/input/PasswordInput"
 import { passwordRules, usernameRules } from "./const"
 
 import config from "@/config"
@@ -68,7 +69,7 @@ export default function Login() {
         {...register("username", usernameRules)}
       />
 
-      <Input
+      <PasswordInput
         label="Senha: "
         placeholder="123456"
         error={errors?.password?.message}
