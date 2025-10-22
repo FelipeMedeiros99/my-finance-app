@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import TopDate from "@/components/top-date/TopDate";
-import WhiteContainer from "@/components/white-container/WhiteContainer";
+import WhiteContainer from "@/components/WhiteContainer";
 import config from "@/config";
 import { Transaction } from "@/components/transaction-manager/types";
 import { calculateConfirmedBalance, calculateTotalBalance, calculateFullTotalsFromAllAccountsTransactions, convertToMoneyFormat } from "@/utils/numberFunctions";

@@ -1,4 +1,4 @@
-button{
+.btn{
   padding: var(--space-1);
   border: none;
   color: pointer;
@@ -6,9 +6,6 @@ button{
   min-width: var(--space-20);
   border-radius: var(--radius-sm);
   cursor: pointer;
-}
-
-.btn{
   min-width: var(--space-32);
   min-height: var(--space-10);
   font-size: var(--font-size-md);

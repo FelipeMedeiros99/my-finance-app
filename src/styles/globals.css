@@ -1,2 +1,5 @@
-@import "./reset.css";
+/* @import "./reset.css"; */
+@import "./variables.css";
+@import "./button.css";
+@import "./titles.css";
 @import "tailwindcss";

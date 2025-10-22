@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef } from "react";
-import WhiteContainer from "../white-container/WhiteContainer";
+import WhiteContainer from "../WhiteContainer";
 
 import styles from "./style.module.css";
 

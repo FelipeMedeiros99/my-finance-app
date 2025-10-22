@@ -14,7 +14,7 @@ import {
   convertToNumberFormat
 } from "@/utils/numberFunctions";
 
-import WhiteContainer from "@/components/white-container/WhiteContainer"
+import WhiteContainer from "@/components/WhiteContainer"
 import Input from "@/components/input/Input";
 import Modal from "@/components/modal/Modal";
 import TopDate from "@/components/top-date/TopDate";

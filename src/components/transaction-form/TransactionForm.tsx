@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 
-import WhiteContainer from "@/components/white-container/WhiteContainer";
+import WhiteContainer from "@/components/WhiteContainer";
 import Input from "@/components/input/Input";
 import Checkbox from "@/components/checkbox/Checkbox";
 import Select from "@/components/select/Select";

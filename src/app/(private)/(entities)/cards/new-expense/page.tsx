@@ -1,6 +1,6 @@
 "use client"
 
-import WhiteContainer from "@/components/white-container/WhiteContainer";
+import WhiteContainer from "@/components/WhiteContainer";
 import VBox from "@/components/box/VBox";
 import HBox from "@/components/box/HBox";
 import Input from "@/components/input/Input";

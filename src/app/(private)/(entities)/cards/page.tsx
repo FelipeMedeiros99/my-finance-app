@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 
-import WhiteContainer from "@/components/white-container/WhiteContainer";
+import WhiteContainer from "@/components/WhiteContainer";
 import TopDate from "@/components/top-date/TopDate";
 import config from "@/config";
 import VBox from "@/components/box/VBox";

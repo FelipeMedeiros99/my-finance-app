@@ -4,7 +4,7 @@ import { useEffect, useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import Input from "@/components/input/Input";
-import WhiteContainer from "@/components/white-container/WhiteContainer";
+import WhiteContainer from "@/components/WhiteContainer";
 import VBox from "@/components/box/VBox";
 import HBox from "@/components/box/HBox";
 import Select from "@/components/select/Select";

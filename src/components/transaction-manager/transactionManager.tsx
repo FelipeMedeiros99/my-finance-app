@@ -1,10 +1,9 @@
 "use client"
 import { useEffect, useState } from "react"
 import { AxiosError } from "axios"
-// import { MdOpenInNew } from "react-icons/md";
 
 import TopDate from "@/components/top-date/TopDate"
-import WhiteContainer from "@/components/white-container/WhiteContainer"
+import WhiteContainer from "@/components/WhiteContainer"
 import config from "@/config"
 import Checkbox from "@/components/checkbox/Checkbox"
 import { returnObjectOfDate } from "@/utils/dateFunctions"
@@ -34,7 +33,6 @@ const DescriptionTransactionBox = ({ transaction, toggleConfirmation }: { transa
             </div>
           </div>
         </div>
-
 
         <div className={styles.rightContainer}>
           <p>Venc: {formatedDate.day}/{formatedDate.month}</p>
@@ -68,25 +66,10 @@ const TotalTableContainer = (
           <p className={styles.itemRight}>{valuesInformations?.unconfirmedTotal}</p>
         </div>
       </div>
-      {/* <table className={styles.table}>
-        <tbody>
-          <tr>
-            <td>Total: </td>
-            <td>{valuesInformations?.total}</td>
-          </tr>
-          <tr>
-            <td>Recebido: </td>
-            <td>{valuesInformations?.confirmedTotal}</td>
-          </tr>
-          <tr>
-            <td>Pendente:</td>
-            <td>{valuesInformations?.unconfirmedTotal}</td>
-          </tr>
-        </tbody>
-      </table> */}
     </div>
   )
 }
+
 
 export default function TransactionManager({ type }: { type: "EXPENSE" | "INCOME" }) {
   const [date, setDate] = useState(new Date())
