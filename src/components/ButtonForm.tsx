@@ -10,6 +10,7 @@ export default function ButtonForm({children, ...props}: ButtonHTMLAttributes<HT
         py-2
         shadow-md
         focus:outline-none focus:ring focus:ring-lime-900
+        mt-4
       " 
       {...props}>
       {children}

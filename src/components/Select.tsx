@@ -1,7 +1,7 @@
 "use client"
 
 import { SelectHTMLAttributes, useId } from "react"
-import { inputStyle } from "./Input";
+import { inputContainer, inputStyle } from "./Input";
 
 type PropsSelect = SelectHTMLAttributes<HTMLSelectElement> & {
   label?: string;
@@ -28,7 +28,7 @@ export default function Select({label, options, error, ...props}: PropsSelect){
   `;
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className={inputContainer}>
       
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {label}

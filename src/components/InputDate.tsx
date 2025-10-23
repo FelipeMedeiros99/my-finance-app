@@ -3,7 +3,7 @@
 import { InputHTMLAttributes, useId, useRef } from "react"
 
 import { convertDateToText } from "@/utils/dateFunctions"
-import { inputStyle } from "./Input"
+import { inputContainer, inputStyle } from "./Input"
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -32,7 +32,7 @@ export default function InputDate({ label, date, error, ref, ...props }: PropsIn
   const id = useId();
   
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className={inputContainer}>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {label}
       </label>

@@ -13,12 +13,17 @@ export const inputStyle = `
   border border-gray-400
   px-2 py-1
   rounded-md
-  focus:outline-none focus:ring-1 focus:ring-lime-600`
+  focus:outline-none focus:ring-1 focus:ring-lime-600
+  w-full`
+
+export const inputContainer = `
+  grid grid-cols-1 w-full
+`
 
 export default function Input({ label, error, ...props }: PropsInput) {
   const id = useId();
   return (
-    <div className="grid grid-cols-1">
+    <div className={inputContainer}>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">{label}</label>
       <input
         className={inputStyle}
