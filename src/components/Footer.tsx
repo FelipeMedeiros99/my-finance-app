@@ -74,9 +74,9 @@ export default function Footer() {
         className={`
           flex items-center justify-center 
           fixed
-          bottom-0
-          right-0
-          z-10
+          bottom-4
+          right-4
+          z-2
           w-16 h-16 
           bg-green-500 text-white 
           rounded-full shadow-lg 

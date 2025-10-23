@@ -64,7 +64,7 @@ export default function Header() {
       <nav className={`
         fixed top-0 right-0 w-64 h-screen 
         flex flex-col 
-        bg-white shadow-2xl z-20
+        bg-white shadow-2xl z-30
         transform transition-all duration-500 ease-in-out
 
         ${!isLinksVisible ? 'translate-x-full opacity-0 pointer-events-none' : 'translate-x-0 opacity-100'}
@@ -76,7 +76,7 @@ export default function Header() {
           </div>
           <h2 className="text-xl font-semibold">Finanças</h2>
         </div>
-        <ul ref={ulRef} className="flex flex-col overflow-y-auto grow">
+        <ul ref={ulRef} className="flex flex-col overflow-y-auto grow z-30">
           {routesSettings.map((routerSetting) => (
             <Link
               onClick={() => setIsLinksVisible(false)}
