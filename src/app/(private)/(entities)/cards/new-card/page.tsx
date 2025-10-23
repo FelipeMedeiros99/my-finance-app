@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import Input from "@/components/Input";
 import WhiteContainer from "@/components/WhiteContainer";
-import VBox from "@/components/box/VBox";
-import HBox from "@/components/box/HBox";
+import VBox from "@/components/VBox";
+import HBox from "@/components/HBox";
 import Select from "@/components/Select";
 
 

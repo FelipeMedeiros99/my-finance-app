@@ -9,7 +9,7 @@ import config from "@/config"
 
 import WhiteContainer from "@/components/WhiteContainer"
 import Input from "@/components/Input";
-import Modal from "@/components/modal/Modal";
+import Modal from "@/components/Modal";
 
 import styles from "./style.module.css"
 import { rules } from "./const";

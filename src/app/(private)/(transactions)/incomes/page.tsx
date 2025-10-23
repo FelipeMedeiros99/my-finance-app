@@ -1,6 +1,6 @@
 "use client"
 
-import TransactionManager from "@/components/transaction-manager/transactionManager"
+import TransactionManager from "@/components/transactionManager"
 
 export default function Incomes() {
 

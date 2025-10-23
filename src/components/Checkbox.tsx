@@ -1,8 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
-import Input from "../Input";
-
-import styles from "./style.module.css"
+import Input from "./Input";
 
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -10,7 +8,7 @@ type Props = InputHTMLAttributes<HTMLInputElement> & {
 
 export default function Checkbox({label, ...props}: Props) {
   return (
-    <div className={styles.checkboxContainer}>
+    <div className="flex items-center gap-2">
       <Input type="checkbox" id="checkbox" {...props} />
       <label htmlFor="checkbox">{label}</label>
     </div>

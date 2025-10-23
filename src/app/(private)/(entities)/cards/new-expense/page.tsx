@@ -1,8 +1,8 @@
 "use client"
 
 import WhiteContainer from "@/components/WhiteContainer";
-import VBox from "@/components/box/VBox";
-import HBox from "@/components/box/HBox";
+import VBox from "@/components/VBox";
+import HBox from "@/components/HBox";
 import Input from "@/components/Input";
 import InputDate from "@/components/InputDate";
 import Select from "@/components/Select";

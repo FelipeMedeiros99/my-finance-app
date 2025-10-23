@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 
-import TopDate from "@/components/top-date/TopDate";
+import TopDate from "@/components/TopDate";
 import WhiteContainer from "@/components/WhiteContainer";
 import config from "@/config";
 import { Transaction } from "@/components/transaction-manager/types";
 import { calculateConfirmedBalance, calculateTotalBalance, calculateFullTotalsFromAllAccountsTransactions, convertToMoneyFormat } from "@/utils/numberFunctions";
-import BalanceTable from "@/components/balance-table/BalanceTable";
+import BalanceTable from "@/components/BalanceTable";
 
 import { Accounts } from "@/components/transaction-form/types";
 import Link from "next/link";

@@ -6,7 +6,7 @@ import { AxiosError } from "axios";
 
 import WhiteContainer from "@/components/WhiteContainer";
 import Input from "@/components/Input";
-import Checkbox from "@/components/checkbox/Checkbox";
+import Checkbox from "@/components/Checkbox";
 import Select from "@/components/Select";
 import InputDate from "@/components/InputDate";
 
@@ -14,12 +14,74 @@ import { convertToNumberFormat, convertToStringNumber, filterNumbers } from "@/u
 import config from "@/config";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { defaultValues, rules } from "./const";
-import { Accounts, Categories, Form, Props } from "./types";
-
 import { convertInputDateToDate } from "@/utils/dateFunctions";
-import ButtonForm from "../ButtonForm";
+import ButtonForm from "./ButtonForm";
+import { Transaction } from "./transactionManager";
 
+
+type TransactionType = "INCOME" | "EXPENSE"
+
+
+export type Props = {
+  type: TransactionType;
+}
+
+export type Form = {
+  description: string;
+  categoryId: number;
+  accountId: number
+  value: string | number;
+  dueDate: string | Date;
+  recurrent: "Não recorrente" | "Parcelado" | "Fixo Mensal";
+  installments: number
+  category: string;
+  account: string;
+  type: TransactionType;
+  wasConfirm: boolean;
+
+}
+
+export type Accounts = {
+  name: string;
+  id: number;
+  openingBalance: number | string;
+  createdAt: Date;
+  transaction?: Transaction[]
+}
+
+export type Categories = {
+  name: string;
+  id: number
+}
+
+const rules = {
+  description: { required: { value: true, message: "Este campo é obrigatório" }, maxLength: { value: 20, message: "O nome deve ter no máximo 20 caracteres" } },
+  value: { required: { value: true, message: "Este campo é obrigatório" }, pattern: { value: /^\d+(.\d{1,2})?$/, message: "O valor deve ser válido" } },
+  dueDate: { required: { value: true, message: "Este campo é obrigatório" } },
+  recurrent: { required: { value: true, message: "Este campo é obrigatório" } },
+  category: { required: { value: true, message: "Este campo é obrigatório" } },
+  account: { required: { value: true, message: "Este campo é obrigatório" } },
+  installments: { min: { value: 1, message: "Quantidade mínima de 1 parcela" } }
+}
+
+const getDateToday = () => {
+  const date = new Date();
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString();
+  return `${year}-${month}-${day}`;
+}
+
+const defaultValues: Omit<Form, "type" | "accountId" | "categoryId"> = {
+  description: "",
+  value: "0.00",
+  installments: 1,
+  recurrent: "Não recorrente",
+  wasConfirm: true,
+  dueDate: getDateToday(),
+  account: "",
+  category: ""
+}
 
 export default function TransactionForm({ type }: Props) {
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<Form>({ defaultValues: { ...defaultValues, type } });
@@ -123,8 +185,6 @@ export default function TransactionForm({ type }: Props) {
     })()
   }, [id, setValue])
 
-  // console.log({date})
-
   useEffect(() => {
     (async () => {
       setIsLoading(true)
@@ -148,7 +208,7 @@ export default function TransactionForm({ type }: Props) {
       isLoading={isLoading}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10 mt-5">
-      
+
         <div className="flex flex-col gap-2">
           <Input disabled={isFormDisabled} error={errors.description?.message} {...register("description", rules.description)} label="Descrição: " placeholder={type === "EXPENSE" ? "Ex: Aluguel" : type === "INCOME" ? "Ex: Salário" : "Ex: Transferência"} />
           {!id && <Select disabled={isFormDisabled} error={errors.recurrent?.message} {...register("recurrent", rules.recurrent)} label="Recorrência: " options={["Não recorrente", "Parcelado"]} />}
@@ -161,11 +221,11 @@ export default function TransactionForm({ type }: Props) {
           </div>
           <Checkbox disabled={isFormDisabled} label={wasConfirm ? "Confirmado" : "Não confirmado"} {...register("wasConfirm")} />
         </div>
-      
+
         <ButtonForm disabled={isFormDisabled} className={`btn ${type === "EXPENSE" ? "danger" : "success"} w-full py-3 text-lg font-semibold`} type="submit">
           Salvar
         </ButtonForm>
-      
+
       </form>
     </WhiteContainer>
   )

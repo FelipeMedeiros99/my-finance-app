@@ -1,11 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef } from "react";
-import WhiteContainer from "../WhiteContainer";
-
-import styles from "./style.module.css";
-
-
+import WhiteContainer from "./WhiteContainer";
 
 type Props = {
   children: React.ReactNode;
@@ -17,10 +13,10 @@ type Props = {
 
 export default function Modal({ children, isOpen, setIsOpen, theme }: Props) {
   const modalRef = useRef<HTMLDivElement>(null)
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen){
+      if (isOpen) {
         if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
           setIsOpen(false);
         }
@@ -29,23 +25,26 @@ export default function Modal({ children, isOpen, setIsOpen, theme }: Props) {
 
     document.addEventListener("click", handleClickOutside);
 
-    return (()=>{
+    return (() => {
       document.removeEventListener("click", handleClickOutside);
     })
   }, [setIsOpen, isOpen])
-  
+
   return (
     <React.Fragment>
-      {isOpen &&
-        <div className={styles.modal}>
-          <div ref={modalRef}>
-          <WhiteContainer title="Nova categoria" theme={theme}>
-            {children}
-          </WhiteContainer>
+      {isOpen && (
+        <div className="fixed inset-0 w-full h-screen bg-black/40 flex justify-center items-center z-10">
+
+          <div
+            ref={modalRef}
+            className="max-w-md w-full mx-4"
+          >
+            <WhiteContainer title="Nova categoria" theme={theme}>
+              {children}
+            </WhiteContainer>
           </div>
         </div>
-      }
+      )}
     </React.Fragment>
-  )
-
+  );
 }

@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 
 import WhiteContainer from "@/components/WhiteContainer";
-import TopDate from "@/components/top-date/TopDate";
+import TopDate from "@/components/TopDate";
 import config from "@/config";
-import VBox from "@/components/box/VBox";
+import VBox from "@/components/VBox";
 
 import styles from "./styles.module.css"
-import HBox from "@/components/box/HBox";
+import HBox from "@/components/HBox";
 import { convertToMoneyFormat } from "@/utils/numberFunctions";
 
 type Card = {
